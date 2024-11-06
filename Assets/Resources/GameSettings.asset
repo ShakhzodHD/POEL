@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7caf5ed7e2be14a8510921537d02ed, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 1782038162481824703, guid: 02742de744f323f409932f61f8c87038,
+    type: 3}
+  WeaponsPrefabs: []
+  PistolShootSound: {fileID: 0}
