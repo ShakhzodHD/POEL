@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1551c33c9901ba44eb12793b6df49d9f, type: 3}
+  m_Name: TestPassive2
+  m_EditorClassIdentifier: 
+  abilityName: Cock Aura
+  description: 123
+  resourceType: 0
+  effectValue: 1
+  duration: 12

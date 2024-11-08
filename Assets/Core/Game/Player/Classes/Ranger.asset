@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde501292bf11654e87f1fc036f30932, type: 3}
+  m_Name: Ranger
+  m_EditorClassIdentifier: 
+  className: Ranger
+  classIcon: {fileID: 0}
+  description: 
+  startingMajorAbilities:
+  - {fileID: 11400000, guid: d55e4dfd580904645b710a8198d4e1a4, type: 2}
+  - {fileID: 11400000, guid: 55b2b0dc9a1b7c24e99c44f0b63d0ed9, type: 2}
+  startingMinorAbilities:
+  - {fileID: 11400000, guid: d6774749be5947b4cbfb82e2e2d4cb60, type: 2}
+  - {fileID: 11400000, guid: 899cde94b5a6110409c56c836b8b8c81, type: 2}
+  startingEscapeAbilities:
+  - {fileID: 11400000, guid: 8616c25bf14eb0844888c54a49c0f9f2, type: 2}
+  - {fileID: 11400000, guid: 297acbc119607c84a9eb1b9b696f24cc, type: 2}
+  startingPassiveAbilities:
+  - {fileID: 11400000, guid: a585145501c3fc54f8755a9bc5e10449, type: 2}
+  - {fileID: 11400000, guid: 011b100abe175f641bedb6dce78a8aa0, type: 2}
+  healthStat:
+    baseValue: 0
+    currentValue: 0
+  resourceType: 0
+  resourceValue:
+    baseValue: 0
+    currentValue: 0

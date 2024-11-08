@@ -10,6 +10,8 @@ public class Boostrap : MonoBehaviour
     public GameStates GameState { get; private set; } = GameStates.InMenu;
     public event Action<GameStates> OnGameStateChanged;
     public GameSettings GameSettings { get; private set; }
+    public TopDownCamera TopDownCamera { get; private set; }
+    public PlayerData PlayerData { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,6 +33,8 @@ public class Boostrap : MonoBehaviour
     {
         ScenesService = FindObjectOfType<ScenesService>();
         UIManager = FindObjectOfType<UIManager>();
+        TopDownCamera = FindObjectOfType<TopDownCamera>();
+        PlayerData = FindObjectOfType<PlayerData>();
     }
     private void OnLevelLoaded()
     {
