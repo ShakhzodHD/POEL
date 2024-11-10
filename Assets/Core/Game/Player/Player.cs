@@ -10,11 +10,21 @@ public class Player : MonoBehaviour
     [SerializeField] private PassiveAbility passiveAbility;
 
     private CharacterClass characterClass;
+    private PlayerMovement playerMovement;
 
+    private HealthSystem healthSystem;
+    private ResourceSystem resourceSystem;
+    private Stats stats;
     private void Start()
     {
         Boostrap.Instance.TopDownCamera.SetTarget(gameObject.transform);
 
+        playerMovement = GetComponent<PlayerMovement>();
+
+        InitCharacter();
+    }
+    private void InitCharacter()
+    {
         int selectedIndex = Boostrap.Instance.PlayerData.idSelectedCharacter;
         var characters = Boostrap.Instance.PlayerData.characters;
 
@@ -22,30 +32,31 @@ public class Player : MonoBehaviour
         {
             var character = characters[selectedIndex];
             characterClass = character.CharacterClass;
+
+            healthSystem = new HealthSystem(characterClass.baseHealth);
+            resourceSystem = new ResourceSystem(characterClass.baseResource);
+
+            playerMovement.MovementSpeed = character.Speed;
+
+            stats = character.Stats;
+
+            Debug.Log("Макс здоровье: " + healthSystem.MaxHealth + " Текущее здоровье: " + healthSystem.CurrentHealth);
+            Debug.Log("Макс ресурс: " + resourceSystem.MaxResource + " Текущи ресурс: " + resourceSystem.MaxResource);
+
+            Debug.Log("Сила / ловкость: " + stats.Strength + " / " + stats.Agility + " / " + stats.Intelligence);
+
             majorAbility = character.MajorAbility;
             minorAbility = character.MinorAbility;
             escapeAbility = character.EscapeAbility;
             passiveAbility = character.PassiveAbility;
 
-            passiveAbility.ApplyEffect(gameObject);
+            passiveAbility.ApplyEffect(gameObject); 
         }
         else
         {
             Debug.LogError("Неверный индекс персонажа.");
         }
     }
-    //public void Initialize(CharacterClass characterClass)
-    //{
-    //    // Инициализация базовых статов
-    //    //health = characterClass.healthStat.baseValue;
-    //    //mana = characterClass.manaStat.baseValue;
-
-    //    // Установка начальных способностей
-    //    //AssignAbilityToSlot(characterClass.startingAbilities[0], AbilitySlotType.Major);
-    //    //AssignAbilityToSlot(characterClass.startingAbilities[1], AbilitySlotType.Minor);
-    //    //AssignAbilityToSlot(characterClass.startingAbilities[2], AbilitySlotType.Escape);
-    //}
-
     public void UseAbility(AbilitySlotType slotType)
     {
         switch (slotType)
@@ -54,9 +65,9 @@ public class Player : MonoBehaviour
                 if (majorAbility != null)
                 {
                     Debug.Log("Мажор");
-                    // Проверяем ресурс и активируем способность
                     if (CanUseAbility(majorAbility))
                         majorAbility.Activate(gameObject);
+                    else { Debug.Log("Недостаточно ресурса"); }
                 }
                 break;
 
@@ -80,13 +91,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Метод для проверки ресурса перед использованием способности
     private bool CanUseAbility(ActiveAbility ability)
     {
-        // Здесь должна быть логика проверки ресурса, например:
-        // - достаточно ли маны или выносливости у игрока для использования способности
-        // Временно возвращаем true для примера
-        return true;
+        return resourceSystem.Consume(ability.resourceCost);
     }
 
     // Метод для назначения способности в слот

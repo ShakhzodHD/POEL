@@ -15,6 +15,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float stoppingDistance = 0.1f;
     [SerializeField] private LayerMask groundLayer;
 
+    public float MovementSpeed
+    {
+        set
+        {
+            if (value < 0.0f) value = 0.0f;
+            agent.speed = value;
+        }
+    }
+
     private InputAction moveAction;
     private bool isMobile;
 

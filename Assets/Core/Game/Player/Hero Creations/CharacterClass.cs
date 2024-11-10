@@ -12,18 +12,15 @@ public class CharacterClass : ScriptableObject
     public ActiveAbility[] startingEscapeAbilities;
     public PassiveAbility[] startingPassiveAbilities;
 
-    // Базовые статы
-    public Stat healthStat;
-    public ResourceType resourceType;
-    public Stat resourceValue;
+    public float baseHealth = 100f;
+    public float baseResource = 50f;
+    public float baseSpeed = 5.0f;
 
-    // Дополнительные статы
-
-    // Структура для хранения значений статов
-    [System.Serializable]
-    public class Stat
+    [SerializeField] private int baseStrength = 1;
+    [SerializeField] private int baseAgility = 1;
+    [SerializeField] private int baseIntelligence = 1;
+    public Stats BaseStats
     {
-        public int baseValue;  // Базовое значение
-        public int currentValue;  // Текущее значение (если планируется динамическое изменение)
+        get { return new Stats(baseStrength, baseAgility, baseIntelligence); }
     }
 }

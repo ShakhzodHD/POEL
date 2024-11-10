@@ -141,7 +141,11 @@ public class CreateHeroPanel : MonoBehaviour
             Boostrap.Instance.PlayerData.abilityMajor,
             Boostrap.Instance.PlayerData.abilityMinor,
             Boostrap.Instance.PlayerData.abilityEscape,
-            Boostrap.Instance.PlayerData.abilityPassive
+            Boostrap.Instance.PlayerData.abilityPassive,
+            selectedClass.baseHealth,
+            selectedClass.baseResource,
+            selectedClass.baseSpeed,
+            selectedClass.BaseStats
         );
 
         idCharacters++;

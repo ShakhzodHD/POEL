@@ -19,10 +19,9 @@ MonoBehaviour:
   startingMinorAbilities: []
   startingEscapeAbilities: []
   startingPassiveAbilities: []
-  healthStat:
-    baseValue: 0
-    currentValue: 0
-  resourceType: 0
-  resourceValue:
-    baseValue: 0
-    currentValue: 0
+  baseHealth: 30
+  baseResource: 70
+  baseSpeed: 7
+  baseStrength: 2
+  baseAgility: 2
+  baseIntelligence: 1

@@ -27,10 +27,9 @@ MonoBehaviour:
   startingPassiveAbilities:
   - {fileID: 11400000, guid: a585145501c3fc54f8755a9bc5e10449, type: 2}
   - {fileID: 11400000, guid: 011b100abe175f641bedb6dce78a8aa0, type: 2}
-  healthStat:
-    baseValue: 0
-    currentValue: 0
-  resourceType: 0
-  resourceValue:
-    baseValue: 0
-    currentValue: 0
+  baseHealth: 80
+  baseResource: 20
+  baseSpeed: 5
+  baseStrength: 1
+  baseAgility: 2
+  baseIntelligence: 1
