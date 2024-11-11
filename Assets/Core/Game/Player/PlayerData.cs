@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
@@ -20,6 +21,5 @@ public class PlayerData : MonoBehaviour
     public void AddCharacter(Character character)
     {
         characters.Add(character);
-        Debug.Log("Добавляю с : " + character.Stats.Strength + " / " + character.Stats.Agility + " / " + character.Stats.Intelligence);
     }
 }

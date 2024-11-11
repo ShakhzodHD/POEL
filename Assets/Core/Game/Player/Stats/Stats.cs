@@ -1,17 +1,29 @@
-[System.Serializable]
+using System.Collections.Generic;
+
 public class Stats
 {
-    public int Strength;
-    public int Agility;
-    public int Intelligence;
-    public Stats(int strength, int agility, int inteleng)
+    public Dictionary<Stat, float> stats;
+    public Stats(Dictionary<Stat, float> initialStats)
     {
-        Strength = strength;
-        Agility = agility;
-        Intelligence = inteleng;    
+        stats = new Dictionary<Stat, float>(initialStats);
     }
     public Stats Clone()
     {
-        return new Stats(Strength, Agility, Intelligence);
+        return new Stats(new Dictionary<Stat, float>(stats));
+    }
+    public void IncreaseStat(Stat stat, float value)
+    {
+        if (stats.ContainsKey(stat))
+        {
+            stats[stat] += value;
+        }
+    }
+    public void DecreaseStat(Stat stat, float value)
+    {
+        if (stats.ContainsKey(stat))
+        { 
+            stats[stat] -= value;
+            if (stats[stat] < 0) stats[stat] = 0;
+        }
     }
 }

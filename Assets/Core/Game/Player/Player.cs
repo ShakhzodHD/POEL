@@ -43,7 +43,10 @@ public class Player : MonoBehaviour
             Debug.Log("Макс здоровье: " + healthSystem.MaxHealth + " Текущее здоровье: " + healthSystem.CurrentHealth);
             Debug.Log("Макс ресурс: " + resourceSystem.MaxResource + " Текущи ресурс: " + resourceSystem.MaxResource);
 
-            Debug.Log("Сила / ловкость: " + stats.Strength + " / " + stats.Agility + " / " + stats.Intelligence);
+            foreach (var stat in character.Stats.stats)
+            {
+                Debug.Log($"{stat.Key}: {stat.Value}");
+            }
 
             majorAbility = character.MajorAbility;
             minorAbility = character.MinorAbility;

@@ -1,3 +1,5 @@
+using RotaryHeart.Lib.SerializableDictionary;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewCharacterClass", menuName = "Character/CharacterClass")]
@@ -16,11 +18,10 @@ public class CharacterClass : ScriptableObject
     public float baseResource = 50f;
     public float baseSpeed = 5.0f;
 
-    [SerializeField] private int baseStrength = 1;
-    [SerializeField] private int baseAgility = 1;
-    [SerializeField] private int baseIntelligence = 1;
+    public SerializableDictionaryBase<Stat, float> baseStatsAttribute;
+
     public Stats BaseStats
     {
-        get { return new Stats(baseStrength, baseAgility, baseIntelligence); }
+        get { return new Stats(new Dictionary<Stat, float>(baseStatsAttribute)); }
     }
 }

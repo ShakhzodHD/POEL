@@ -4662,6 +4662,7 @@ MonoBehaviour:
   abilityMinor: {fileID: 0}
   abilityEscape: {fileID: 0}
   abilityPassive: {fileID: 0}
+  idSelectedCharacter: 0
 --- !u!1 &1556706093
 GameObject:
   m_ObjectHideFlags: 0
