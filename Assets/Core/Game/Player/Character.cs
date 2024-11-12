@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+
 public class Character
 {
     public int Id { get; private set; }
@@ -11,7 +14,9 @@ public class Character
     public HealthSystem Health { get; private set; }
     public ResourceSystem Resource { get; private set; }
     public Stats Stats { get; set; }
-
+    public List<Skill> UnlockedSkills { get; private set; }
+    public int SkillPoints { get; private set; }
+    public int Level { get; private set; }
     public Character(int id, string name, 
         CharacterClass characterClass, ActiveAbility major, ActiveAbility minor, ActiveAbility escape, PassiveAbility passive,
         float maxHealth, float maxResource, float movementSpeed, Stats stats)
@@ -27,5 +32,33 @@ public class Character
         Resource = new ResourceSystem(maxResource);
         Speed = movementSpeed;
         Stats = stats.Clone();
+        UnlockedSkills = new List<Skill>();
+        SkillPoints = 0;
+        Level = 1;
+    }
+    public void AddSkillPoints(int points)
+    {
+        SkillPoints += points;
+    }
+
+    public bool UnlockSkill(Skill skill)
+    {
+        if (CanUnlockSkill(skill))
+        {
+            UnlockedSkills.Add(skill);
+            SkillPoints -= skill.cost;
+            return true;
+        }
+        return false;
+    }
+
+    public bool CanUnlockSkill(Skill skill)
+    {
+        if (UnlockedSkills.Contains(skill)) return false;
+        foreach (Skill prerequisite in skill.prerequisites)
+        {
+            if (!UnlockedSkills.Contains(prerequisite)) return false;
+        }
+        return SkillPoints >= skill.cost;
     }
 }

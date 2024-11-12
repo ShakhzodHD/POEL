@@ -6,7 +6,6 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject canvas;
-
     [SerializeField] private List<GameObject> panels;
 
     private MenuStates _menuStates = MenuStates.StartMenu;
@@ -26,6 +25,7 @@ public class UIManager : MonoBehaviour
             case GameStates.InProgress:
                 ChangeMenuState(MenuStates.Gameplay);
                 panels[(int)MenuStates.Gameplay].GetComponent<GameplayPanel>().Init();
+                panels[(int)MenuStates.Upgrade].GetComponent<UpgradePanel>().Initialize(Boostrap.Instance.Player);
                 break;
             case GameStates.GameOver:
                 ChangeMenuState(MenuStates.GameOver);

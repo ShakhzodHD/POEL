@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private ActiveAbility escapeAbility;
     [SerializeField] private PassiveAbility passiveAbility;
 
+    private Character currentCharacter;
     private CharacterClass characterClass;
     private PlayerMovement playerMovement;
 
@@ -18,10 +19,18 @@ public class Player : MonoBehaviour
     private void Start()
     {
         Boostrap.Instance.TopDownCamera.SetTarget(gameObject.transform);
+        Boostrap.Instance.InitPlayer(this);
 
         playerMovement = GetComponent<PlayerMovement>();
 
         InitCharacter();
+    }
+    private void Update() // Временно
+    {
+        if (Input.GetKeyUp(KeyCode.T))
+        {
+            Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Upgrade);
+        }
     }
     private void InitCharacter()
     {
@@ -59,6 +68,24 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Неверный индекс персонажа.");
         }
+    }
+    public bool UnlockSkill(Skill skill)
+    {
+        if (currentCharacter.UnlockSkill(skill))
+        {
+            ApplySkillEffects(skill);
+            return true;
+        }
+        return false;
+    }
+    public void ApplySkillEffects(Skill skill)
+    {
+        Debug.Log("Apply Skill Effec: " + skill.name);
+        //if (skill is StatModifierSkill statSkill)
+        //{
+        //    stats.ModifyStat(statSkill.statType, statSkill.modifierValue);
+        //    UpdateSystemsFromStats();
+        //}
     }
     public void UseAbility(AbilitySlotType slotType)
     {

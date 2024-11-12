@@ -8,4 +8,5 @@ public enum MenuStates
     Pause,
     Levels,
     GameOver,
+    Upgrade
 }
