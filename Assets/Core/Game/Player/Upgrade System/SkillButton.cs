@@ -8,16 +8,12 @@ public class SkillButton : MonoBehaviour
     [SerializeField] private Color availableColor = Color.yellow;
     [SerializeField] private Color lockedColor = Color.red;
 
-    public Skill Skill { get; private set; }
+    public Skill Skill;
     private Button button;
-
-    private void Awake()
-    {
-        button = GetComponent<Button>();
-    }
-
     public void UpdateState(Character character)
     {
+        if (button == null) button = GetComponent<Button>();
+
         bool isUnlocked = character.UnlockedSkills.Contains(Skill);
         bool canUnlock = character.CanUnlockSkill(Skill);
 

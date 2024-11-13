@@ -134,7 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df82a089afdff44f95f9f9f0b9af0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 11400000, guid: 3caf75e9078397545906f1720fc31cab, type: 2}
+  backgroundImage: {fileID: 610271465039251384}
+  unlockedColor: {r: 0, g: 1, b: 0, a: 1}
+  availableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lockedColor: {r: 1, g: 0, b: 0, a: 1}
+  Skill: {fileID: 0}
 --- !u!1 &9119640395721893361
 GameObject:
   m_ObjectHideFlags: 0

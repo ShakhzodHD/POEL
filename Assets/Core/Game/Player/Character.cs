@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -40,7 +41,6 @@ public class Character
     {
         SkillPoints += points;
     }
-
     public bool UnlockSkill(Skill skill)
     {
         if (CanUnlockSkill(skill))
@@ -51,9 +51,9 @@ public class Character
         }
         return false;
     }
-
     public bool CanUnlockSkill(Skill skill)
     {
+        if (skill == null) return true;
         if (UnlockedSkills.Contains(skill)) return false;
         foreach (Skill prerequisite in skill.prerequisites)
         {

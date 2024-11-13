@@ -1,24 +1,34 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradePanel : MonoBehaviour
 {
     [SerializeField] private Text skillPointsText;
+    [SerializeField] private Button close;
 
     private SkillButton[] skillButtons;
     private Character currentCharacter;
     private Player currentPlayer;
+    private void Start()
+    {
+        close.onClick.AddListener(OnButtonCloseClick);
+    }
+
+    private void OnButtonCloseClick()
+    {
+        Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Gameplay);
+    }
 
     public void Initialize(Player player)
     {
+        Debug.Log("Инициализация Upgrade Panel");
         currentPlayer = player;
         currentCharacter = Boostrap.Instance.PlayerData.characters[
             Boostrap.Instance.PlayerData.idSelectedCharacter];
 
-        // Получаем все кнопки навыков, которые уже размещены в сцене
         skillButtons = GetComponentsInChildren<SkillButton>();
 
-        // Добавляем обработчики нажатий
         foreach (var button in skillButtons)
         {
             button.GetComponent<Button>().onClick.AddListener(() => OnSkillButtonClicked(button.Skill));

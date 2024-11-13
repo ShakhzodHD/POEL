@@ -12,7 +12,6 @@ public class Boostrap : MonoBehaviour
     public GameSettings GameSettings { get; private set; }
     public TopDownCamera TopDownCamera { get; private set; }
     public PlayerData PlayerData { get; private set; }
-    public Player Player { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -36,10 +35,6 @@ public class Boostrap : MonoBehaviour
         UIManager = FindObjectOfType<UIManager>();
         TopDownCamera = FindObjectOfType<TopDownCamera>();
         PlayerData = FindObjectOfType<PlayerData>();
-    }
-    public void InitPlayer(Player currentPlayer)
-    {
-        Player = currentPlayer;
     }
     private void OnLevelLoaded()
     {

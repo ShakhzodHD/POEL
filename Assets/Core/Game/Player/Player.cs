@@ -19,11 +19,11 @@ public class Player : MonoBehaviour
     private void Start()
     {
         Boostrap.Instance.TopDownCamera.SetTarget(gameObject.transform);
-        Boostrap.Instance.InitPlayer(this);
 
         playerMovement = GetComponent<PlayerMovement>();
 
         InitCharacter();
+        Boostrap.Instance.UIManager.InitUpgradePanel(this);
     }
     private void Update() // Временно
     {
@@ -62,6 +62,8 @@ public class Player : MonoBehaviour
             escapeAbility = character.EscapeAbility;
             passiveAbility = character.PassiveAbility;
 
+            character.AddSkillPoints(4); // temp
+
             passiveAbility.ApplyEffect(gameObject); 
         }
         else
@@ -69,7 +71,7 @@ public class Player : MonoBehaviour
             Debug.LogError("Неверный индекс персонажа.");
         }
     }
-    public bool UnlockSkill(Skill skill)
+    public bool UnlockSkill(Skill skill) // жижа
     {
         if (currentCharacter.UnlockSkill(skill))
         {

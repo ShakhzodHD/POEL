@@ -25,7 +25,6 @@ public class UIManager : MonoBehaviour
             case GameStates.InProgress:
                 ChangeMenuState(MenuStates.Gameplay);
                 panels[(int)MenuStates.Gameplay].GetComponent<GameplayPanel>().Init();
-                panels[(int)MenuStates.Upgrade].GetComponent<UpgradePanel>().Initialize(Boostrap.Instance.Player);
                 break;
             case GameStates.GameOver:
                 ChangeMenuState(MenuStates.GameOver);
@@ -43,5 +42,9 @@ public class UIManager : MonoBehaviour
     {
         panels.FirstOrDefault(panel => panel.activeSelf)?.SetActive(false);
         panels[(int)_menuStates].SetActive(true);
+    }
+    public void InitUpgradePanel(Player player)
+    {
+        panels[(int)MenuStates.Upgrade].GetComponent<UpgradePanel>().Initialize(player);
     }
 }
