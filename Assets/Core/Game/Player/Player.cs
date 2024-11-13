@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int idCharacter {  get; private set; }
-
     [SerializeField] private ActiveAbility majorAbility;
     [SerializeField] private ActiveAbility minorAbility;
     [SerializeField] private ActiveAbility escapeAbility;
@@ -15,7 +13,6 @@ public class Player : MonoBehaviour
 
     private HealthSystem healthSystem;
     private ResourceSystem resourceSystem;
-    private Stats stats;
     private void Start()
     {
         Boostrap.Instance.TopDownCamera.SetTarget(gameObject.transform);
@@ -40,14 +37,13 @@ public class Player : MonoBehaviour
         if (selectedIndex >= 0 && selectedIndex < characters.Count)
         {
             var character = characters[selectedIndex];
+            currentCharacter = character;
             characterClass = character.CharacterClass;
 
             healthSystem = new HealthSystem(characterClass.baseHealth);
             resourceSystem = new ResourceSystem(characterClass.baseResource);
 
             playerMovement.MovementSpeed = character.Speed;
-
-            stats = character.Stats;
 
             Debug.Log("Макс здоровье: " + healthSystem.MaxHealth + " Текущее здоровье: " + healthSystem.CurrentHealth);
             Debug.Log("Макс ресурс: " + resourceSystem.MaxResource + " Текущи ресурс: " + resourceSystem.MaxResource);
@@ -82,12 +78,7 @@ public class Player : MonoBehaviour
     }
     public void ApplySkillEffects(Skill skill)
     {
-        Debug.Log("Apply Skill Effec: " + skill.name);
-        //if (skill is StatModifierSkill statSkill)
-        //{
-        //    stats.ModifyStat(statSkill.statType, statSkill.modifierValue);
-        //    UpdateSystemsFromStats();
-        //}
+        skill.ApplyEffect(currentCharacter);
     }
     public void UseAbility(AbilitySlotType slotType)
     {

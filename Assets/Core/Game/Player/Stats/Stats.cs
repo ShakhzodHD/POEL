@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 
 public class Stats
@@ -13,6 +14,10 @@ public class Stats
     }
     public void IncreaseStat(Stat stat, float value)
     {
+        if (value < 0)
+        {
+            throw new ArgumentException("Values ​​for increastion cannot be negative: " + value.ToString());
+        }
         if (stats.ContainsKey(stat))
         {
             stats[stat] += value;
@@ -20,6 +25,8 @@ public class Stats
     }
     public void DecreaseStat(Stat stat, float value)
     {
+        value = Math.Abs(value);
+
         if (stats.ContainsKey(stat))
         { 
             stats[stat] -= value;

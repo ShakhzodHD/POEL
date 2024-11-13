@@ -18,3 +18,8 @@ MonoBehaviour:
   cost: 1
   icon: {fileID: 0}
   prerequisites: []
+  effects:
+  - statType: 1
+    modifierValue: 2
+  - statType: 2
+    modifierValue: -3
