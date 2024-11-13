@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class Character
 {
@@ -17,7 +15,9 @@ public class Character
     public Stats Stats { get; set; }
     public List<Skill> UnlockedSkills { get; private set; }
     public int SkillPoints { get; private set; }
-    public int Level { get; private set; }
+    public int Level { get; set; }
+    public int CurrentExperience { get; set; }
+    public int ExperienceToNextLevel { get; set; }
     public Character(int id, string name, 
         CharacterClass characterClass, ActiveAbility major, ActiveAbility minor, ActiveAbility escape, PassiveAbility passive,
         float maxHealth, float maxResource, float movementSpeed, Stats stats)
@@ -36,6 +36,8 @@ public class Character
         UnlockedSkills = new List<Skill>();
         SkillPoints = 0;
         Level = 1;
+        CurrentExperience = 0;
+        ExperienceToNextLevel = 0;
     }
     public void AddSkillPoints(int points)
     {

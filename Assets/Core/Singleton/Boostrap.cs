@@ -12,6 +12,7 @@ public class Boostrap : MonoBehaviour
     public GameSettings GameSettings { get; private set; }
     public TopDownCamera TopDownCamera { get; private set; }
     public PlayerData PlayerData { get; private set; }
+    public ExperienceSystem ExperienceSystem { get; set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)

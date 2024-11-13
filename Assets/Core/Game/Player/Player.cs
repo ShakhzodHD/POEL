@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-
 public class Player : MonoBehaviour
 {
     [SerializeField] private ActiveAbility majorAbility;
@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     private HealthSystem healthSystem;
     private ResourceSystem resourceSystem;
+
     private void Start()
     {
         Boostrap.Instance.TopDownCamera.SetTarget(gameObject.transform);
@@ -21,12 +22,41 @@ public class Player : MonoBehaviour
 
         InitCharacter();
         Boostrap.Instance.UIManager.InitUpgradePanel(this);
+        Boostrap.Instance.ExperienceSystem.Initialize();
+        Boostrap.Instance.ExperienceSystem.OnExperienceGained += OnExperienceGained;
+        Boostrap.Instance.ExperienceSystem.OnLevelUp += OnLevelUp;
     }
+
+    private void OnLevelUp(int newLevel)
+    {
+        if (newLevel <= 0)
+        {
+            throw new ArgumentException("New level cannot be negative: " + newLevel);
+        }
+
+        currentCharacter.AddSkillPoints(1);
+        currentCharacter.Level = newLevel;
+        
+
+        Debug.Log($"LevelUP! New Level: {newLevel}");
+    }
+
+    private void OnExperienceGained(int currentExperience, int experienceToNextLevel)
+    {
+        Debug.Log($"OnExperienceGained: CurrentExp {currentCharacter} CurrentExpToNextLevel {experienceToNextLevel}");
+        currentCharacter.CurrentExperience = currentExperience;
+        currentCharacter.ExperienceToNextLevel = experienceToNextLevel;
+    }
+
     private void Update() // Временно
     {
-        if (Input.GetKeyUp(KeyCode.T))
+        if (Input.GetKeyUp(KeyCode.T)) // Открыть панель c улучшениями
         {
             Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Upgrade);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            Boostrap.Instance.ExperienceSystem.AddExperience(50);
         }
     }
     private void InitCharacter()
@@ -58,23 +88,12 @@ public class Player : MonoBehaviour
             escapeAbility = character.EscapeAbility;
             passiveAbility = character.PassiveAbility;
 
-            character.AddSkillPoints(4); // temp
-
             passiveAbility.ApplyEffect(gameObject); 
         }
         else
         {
             Debug.LogError("Неверный индекс персонажа.");
         }
-    }
-    public bool UnlockSkill(Skill skill) // жижа
-    {
-        if (currentCharacter.UnlockSkill(skill))
-        {
-            ApplySkillEffects(skill);
-            return true;
-        }
-        return false;
     }
     public void ApplySkillEffects(Skill skill)
     {

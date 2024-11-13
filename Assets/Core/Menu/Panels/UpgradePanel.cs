@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +12,7 @@ public class UpgradePanel : MonoBehaviour
     private void Start()
     {
         close.onClick.AddListener(OnButtonCloseClick);
+        Boostrap.Instance.ExperienceSystem.OnLevelUp += (newLevel) => RefreshUI();
     }
 
     private void OnButtonCloseClick()

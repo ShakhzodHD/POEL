@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
@@ -11,6 +10,7 @@ public class PlayerData : MonoBehaviour
     public PassiveAbility abilityPassive;
     public List<Character> characters = new();
     public int idSelectedCharacter;
+
     private void Awake()
     {
         abilityMajor = new ActiveAbility();
