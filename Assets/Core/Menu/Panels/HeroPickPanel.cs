@@ -6,12 +6,12 @@ public class HeroPickPanel : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button[] heroSlots;
     [SerializeField] private Button[] deleteButtons;
-    [SerializeField] private Button _createHero;
-    [SerializeField] private Button _menu;
+    [SerializeField] private Button createHero;
+    [SerializeField] private Button menu;
     private void Start()
     {
-        _createHero.onClick.AddListener(OnButtonCreateHeroClick);
-        _menu.onClick.AddListener(OnButtonMenuClick);
+        createHero.onClick.AddListener(OnButtonCreateHeroClick);
+        menu.onClick.AddListener(OnButtonMenuClick);
 
         for (int i = 0; i < deleteButtons.Length; i++)
         {
@@ -55,7 +55,7 @@ public class HeroPickPanel : MonoBehaviour
         Boostrap.Instance.ScenesService.InitialLoad();
         Boostrap.Instance.ScenesService.LoadLevel(Constants.HIDEOUT_SCENE_NAME);
         Boostrap.Instance.GameEvents.OnEnterHideout?.Invoke();
-        Boostrap.Instance.PlayerData.idSelectedCharacter = character.Id;
+        Boostrap.Instance.PlayerData.selectedCharacter = character;
     }
     private void OnButtonCreateHeroClick()
     {
@@ -78,7 +78,6 @@ public class HeroPickPanel : MonoBehaviour
         if (index < characters.Count)
         {
             characters.RemoveAt(index);
-
             UpdateHeroSlots();
         }
     }

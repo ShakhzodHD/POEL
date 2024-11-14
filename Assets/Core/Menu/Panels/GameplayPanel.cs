@@ -15,7 +15,7 @@ public class GameplayPanel : MonoBehaviour
     }
     private void OnButtonPauseClick()
     {
-        Time.timeScale = 0;
+        Boostrap.Instance.TimeScaleController.PauseGame();
         Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Pause);
     }
 }

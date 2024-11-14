@@ -19,8 +19,8 @@ public class ExperienceSystem : MonoBehaviour
     public void Initialize()
     {
         Debug.Log("Инициализация ExperienceSystem");
-        currentExperience = Boostrap.Instance.PlayerData.characters[Boostrap.Instance.PlayerData.idSelectedCharacter].CurrentExperience;
-        currentLevel = Boostrap.Instance.PlayerData.characters[Boostrap.Instance.PlayerData.idSelectedCharacter].Level;
+        currentExperience = Boostrap.Instance.PlayerData.selectedCharacter.CurrentExperience;
+        currentLevel = Boostrap.Instance.PlayerData.selectedCharacter.Level;
     }
     public void AddExperience(int amout)
     {

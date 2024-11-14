@@ -22,9 +22,6 @@ public class Player : MonoBehaviour
 
         InitCharacter();
         Boostrap.Instance.UIManager.InitUpgradePanel(this);
-        Boostrap.Instance.ExperienceSystem.Initialize();
-        Boostrap.Instance.ExperienceSystem.OnExperienceGained += OnExperienceGained;
-        Boostrap.Instance.ExperienceSystem.OnLevelUp += OnLevelUp;
     }
 
     private void OnLevelUp(int newLevel)
@@ -38,7 +35,7 @@ public class Player : MonoBehaviour
         currentCharacter.Level = newLevel;
         
 
-        Debug.Log($"LevelUP! New Level: {newLevel}");
+        Debug.Log($"Player.cs LevelUP! New Level: {newLevel}");
     }
 
     private void OnExperienceGained(int currentExperience, int experienceToNextLevel)
@@ -61,39 +58,32 @@ public class Player : MonoBehaviour
     }
     private void InitCharacter()
     {
-        int selectedIndex = Boostrap.Instance.PlayerData.idSelectedCharacter;
-        var characters = Boostrap.Instance.PlayerData.characters;
+        currentCharacter = Boostrap.Instance.PlayerData.selectedCharacter; ;
+        characterClass = currentCharacter.CharacterClass;
 
-        if (selectedIndex >= 0 && selectedIndex < characters.Count)
+        healthSystem = new HealthSystem(characterClass.baseHealth);
+        resourceSystem = new ResourceSystem(characterClass.baseResource);
+
+        playerMovement.MovementSpeed = currentCharacter.Speed;
+
+        Boostrap.Instance.ExperienceSystem.Initialize();
+        Boostrap.Instance.ExperienceSystem.OnExperienceGained += OnExperienceGained;
+        Boostrap.Instance.ExperienceSystem.OnLevelUp += OnLevelUp;
+
+        Debug.Log("Макс здоровье: " + healthSystem.MaxHealth + " Текущее здоровье: " + healthSystem.CurrentHealth);
+        Debug.Log("Макс ресурс: " + resourceSystem.MaxResource + " Текущи ресурс: " + resourceSystem.MaxResource);
+
+        foreach (var stat in currentCharacter.Stats.stats)
         {
-            var character = characters[selectedIndex];
-            currentCharacter = character;
-            characterClass = character.CharacterClass;
-
-            healthSystem = new HealthSystem(characterClass.baseHealth);
-            resourceSystem = new ResourceSystem(characterClass.baseResource);
-
-            playerMovement.MovementSpeed = character.Speed;
-
-            Debug.Log("Макс здоровье: " + healthSystem.MaxHealth + " Текущее здоровье: " + healthSystem.CurrentHealth);
-            Debug.Log("Макс ресурс: " + resourceSystem.MaxResource + " Текущи ресурс: " + resourceSystem.MaxResource);
-
-            foreach (var stat in character.Stats.stats)
-            {
-                Debug.Log($"{stat.Key}: {stat.Value}");
-            }
-
-            majorAbility = character.MajorAbility;
-            minorAbility = character.MinorAbility;
-            escapeAbility = character.EscapeAbility;
-            passiveAbility = character.PassiveAbility;
-
-            passiveAbility.ApplyEffect(gameObject); 
+            Debug.Log($"{stat.Key}: {stat.Value}");
         }
-        else
-        {
-            Debug.LogError("Неверный индекс персонажа.");
-        }
+
+        majorAbility = currentCharacter.MajorAbility;
+        minorAbility = currentCharacter.MinorAbility;
+        escapeAbility = currentCharacter.EscapeAbility;
+        passiveAbility = currentCharacter.PassiveAbility;
+
+        passiveAbility.ApplyEffect(gameObject);
     }
     public void ApplySkillEffects(Skill skill)
     {

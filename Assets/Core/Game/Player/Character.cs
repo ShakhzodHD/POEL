@@ -35,7 +35,7 @@ public class Character
         Stats = stats.Clone();
         UnlockedSkills = new List<Skill>();
         SkillPoints = 0;
-        Level = 1;
+        Level = 0;
         CurrentExperience = 0;
         ExperienceToNextLevel = 0;
     }

@@ -9,8 +9,7 @@ public class PlayerData : MonoBehaviour
     public ActiveAbility abilityEscape;
     public PassiveAbility abilityPassive;
     public List<Character> characters = new();
-    public int idSelectedCharacter;
-
+    public Character selectedCharacter;
     private void Awake()
     {
         abilityMajor = new ActiveAbility();

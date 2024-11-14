@@ -12,6 +12,7 @@ public class Boostrap : MonoBehaviour
     public GameSettings GameSettings { get; private set; }
     public TopDownCamera TopDownCamera { get; private set; }
     public PlayerData PlayerData { get; private set; }
+    public TimeScaleController TimeScaleController { get; private set; }
     public ExperienceSystem ExperienceSystem { get; set; }
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class Boostrap : MonoBehaviour
         UIManager = FindObjectOfType<UIManager>();
         TopDownCamera = FindObjectOfType<TopDownCamera>();
         PlayerData = FindObjectOfType<PlayerData>();
+        TimeScaleController = FindObjectOfType<TimeScaleController>();
     }
     private void OnLevelLoaded()
     {

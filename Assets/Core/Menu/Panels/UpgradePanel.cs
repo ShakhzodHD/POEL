@@ -12,9 +12,11 @@ public class UpgradePanel : MonoBehaviour
     private void Start()
     {
         close.onClick.AddListener(OnButtonCloseClick);
-        Boostrap.Instance.ExperienceSystem.OnLevelUp += (newLevel) => RefreshUI();
     }
-
+    private void OnEnable()
+    {
+        RefreshUI();
+    }
     private void OnButtonCloseClick()
     {
         Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Gameplay);
@@ -24,21 +26,21 @@ public class UpgradePanel : MonoBehaviour
     {
         Debug.Log("Инициализация Upgrade Panel");
         currentPlayer = player;
-        currentCharacter = Boostrap.Instance.PlayerData.characters[
-            Boostrap.Instance.PlayerData.idSelectedCharacter];
-
+        currentCharacter = Boostrap.Instance.PlayerData.selectedCharacter;
         skillButtons = GetComponentsInChildren<SkillButton>();
-
         foreach (var button in skillButtons)
         {
             button.GetComponent<Button>().onClick.AddListener(() => OnSkillButtonClicked(button.Skill));
         }
 
+        Boostrap.Instance.ExperienceSystem.OnLevelUp += (newLevel) => RefreshUI();
         RefreshUI();
     }
 
     private void RefreshUI()
     {
+        Debug.Log($"RefreshUI OnLevelUp");
+
         skillPointsText.text = $"Skill Points: {currentCharacter.SkillPoints}";
 
         foreach (var button in skillButtons)

@@ -96,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
     private void MoveToPosition(Vector2 screenPosition)
     {
         if (!enabled || gameCamera == null) return;
-
         Ray ray = gameCamera.ScreenPointToRay(screenPosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))

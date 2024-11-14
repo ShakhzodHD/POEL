@@ -3,7 +3,7 @@ using UnityEngine;
 public class TopDownCamera : MonoBehaviour
 {
     [Header("Camera Settings")]
-    [SerializeField] private Vector3 offset = new Vector3(0, 10, -10); // Смещение камеры относительно игрока
+    [SerializeField] private Vector3 offset = new Vector3(0, 10, -10);
     [SerializeField] private float followSpeed = 5f; // Скорость следования камеры
     [SerializeField] private float rotationSpeed = 5f; // Скорость вращения камеры
 
@@ -12,7 +12,7 @@ public class TopDownCamera : MonoBehaviour
     [SerializeField] private float maxZoom = 20f; // Максимальное значение зума
     [SerializeField] private float zoomSpeed = 2f; // Скорость изменения зума
 
-    private Transform target; // Цель для слежения
+    private Transform target;
     private float currentZoom = 10f; // Текущий зум
 
     private void Start()
