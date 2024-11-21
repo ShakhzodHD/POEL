@@ -1,20 +1,17 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridInventory : MonoBehaviour
+public class GridInventory
 {
     public int gridWidth = 12;
     public int gridHeight = 5;
 
     private bool[,] occupiedCells;
-    private List<BaseInventoryItem> items = new List<BaseInventoryItem>();
-
-    private void Start()
-    {
-        InitializeGrid();
-    }
-
-    private void InitializeGrid()
+    private List<BaseInventoryItem> items = new();
+    public List<BaseInventoryItem> Items => items;
+    public event Action OnPlaceItem;
+    public void InitializeGrid()
     {
         occupiedCells = new bool[gridWidth, gridHeight];
     }
@@ -63,6 +60,8 @@ public class GridInventory : MonoBehaviour
         item.position = new Vector2Int(x, y);
         items.Add(item);
         Debug.Log($"Добавлен предмет {item.ToString()}");
+
+        OnPlaceItem?.Invoke();
     }
 
     public void RemoveItem(BaseInventoryItem item)

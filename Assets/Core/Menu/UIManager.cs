@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private List<GameObject> panels;
 
+    [SerializeField] private RectTransform inventoryPanel;
+
     private MenuStates _menuStates = MenuStates.StartMenu;
 
     public void Init()
@@ -20,6 +22,7 @@ public class UIManager : MonoBehaviour
         {
             case GameStates.InMenu:
                 ChangeMenuState(MenuStates.StartMenu);
+                CloseInventory();
                 Boostrap.Instance.ScenesService.LoadMenu();
                 break;
             case GameStates.InProgress:
@@ -28,6 +31,8 @@ public class UIManager : MonoBehaviour
                 break;
             case GameStates.GameOver:
                 ChangeMenuState(MenuStates.GameOver);
+                Boostrap.Instance.PlayerData.input.SwitchCurrentActionMap("Disable");
+                CloseInventory();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(gameStates), gameStates, null);
@@ -36,6 +41,7 @@ public class UIManager : MonoBehaviour
     public void ChangeMenuState(MenuStates menuState)
     {
         _menuStates = menuState;
+        if (_menuStates == MenuStates.Pause) CloseInventory();
         OpenPanelForCurrentState();
     }
     private void OpenPanelForCurrentState()
@@ -46,5 +52,21 @@ public class UIManager : MonoBehaviour
     public void InitUpgradePanel(Player player)
     {
         panels[(int)MenuStates.Upgrade].GetComponent<UpgradePanel>().Initialize(player);
+    }
+
+    public void ToggleInventory()
+    {
+        if (inventoryPanel != null)
+        {
+            bool isActive = inventoryPanel.gameObject.activeSelf;
+            inventoryPanel.gameObject.SetActive(!isActive);
+
+            //Cursor.lockState = isActive ? CursorLockMode.Locked : CursorLockMode.None;
+            //Cursor.visible = !isActive;
+        }
+    }
+    private void CloseInventory()
+    {
+        if (inventoryPanel != null) inventoryPanel.gameObject.SetActive(false);
     }
 }

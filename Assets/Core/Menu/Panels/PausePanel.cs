@@ -18,6 +18,7 @@ public class PausePanel : MonoBehaviour
     {
         Time.timeScale = 1f;
         Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Gameplay);
+        Boostrap.Instance.PlayerData.input.SwitchCurrentActionMap("Player");
     }
     private void OnButtonSettingsClick()
     {

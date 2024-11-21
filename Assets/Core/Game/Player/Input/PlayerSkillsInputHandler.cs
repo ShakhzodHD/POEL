@@ -8,14 +8,15 @@ public class PlayerSkillsInputHandler : MonoBehaviour
     private InputAction major;
     private InputAction minor;
     private InputAction escape;
+
     private void Awake()
     {
         if (playerInput == null) playerInput = GetComponent<PlayerInput>();
         if (player == null) player = GetComponent<Player>();
 
-        major = playerInput.actions.FindAction("UseMajorAbility");
-        minor = playerInput.actions.FindAction("UseMinorAbility");
-        escape = playerInput.actions.FindAction("UseEscapeAbility");
+        major = playerInput.actions.FindAction(InputActions.UseMajorAbility.ToString());
+        minor = playerInput.actions.FindAction(InputActions.UseMinorAbility.ToString());
+        escape = playerInput.actions.FindAction(InputActions.UseEscapeAbility.ToString());
     }
     private void OnEnable()
     {

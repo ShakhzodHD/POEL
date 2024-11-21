@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Value",
+                    "id": "6d5ccbc0-0144-4854-a10b-0e4a26fcdf16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -106,8 +115,25 @@
                     "action": "UseEscapeAbility",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7b5f91b-38c3-4509-bfe6-acf201a142aa",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Disable",
+            "id": "52e11d0f-9d15-49a1-8564-84c09cb06be2",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

@@ -14,13 +14,28 @@ public class GridInventoryUI : MonoBehaviour
     public RectTransform itemsContainer;
 
     private InventorySlot[,] slots;
-
-    private void Start()
+    public void SetInventory(GridInventory newInventory)
     {
+        inventory = newInventory;
+
+        foreach (Transform child in gridContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in itemsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
         CreateGrid();
+
+        foreach (var item in inventory.Items)
+        {
+            CreateItemUI(item);
+        }
     }
 
-    private void CreateGrid()
+    public void CreateGrid()
     {
         slots = new InventorySlot[inventory.gridWidth, inventory.gridHeight];
 
@@ -89,6 +104,19 @@ public class GridInventoryUI : MonoBehaviour
 
         itemUI.Initialize(item, this);
     }
+    public void UpdateInventoryUI()
+    {
+        foreach (Transform child in itemsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var item in inventory.Items)
+        {
+            CreateItemUI(item);
+        }
+    }
+
     public Vector2 GetCellPosition(int x, int y)
     {
         return new Vector2(
@@ -103,5 +131,14 @@ public class GridInventoryUI : MonoBehaviour
             Mathf.FloorToInt(position.x / (cellSize + spacing)),
             Mathf.FloorToInt(-position.y / (cellSize + spacing))
         );
+    }
+
+    private void OnEnable()
+    {
+        if (inventory != null) inventory.OnPlaceItem += UpdateInventoryUI;
+    }
+    private void OnDisable()
+    {
+        if (inventory != null) inventory.OnPlaceItem -= UpdateInventoryUI;
     }
 }

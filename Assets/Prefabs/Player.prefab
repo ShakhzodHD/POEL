@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8811399761833536969}
   - component: {fileID: 4112046180341441220}
   - component: {fileID: 1337948679945880128}
+  - component: {fileID: 3730619928896117842}
   - component: {fileID: 9068226514586619568}
   m_Layer: 0
   m_Name: Player
@@ -105,6 +106,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 022d2d23-830f-481e-af0d-38ef4682ee99
     m_ActionName: 'Player/UsePassiveAbility '
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d5ccbc0-0144-4854-a10b-0e4a26fcdf16
+    m_ActionName: Player/Inventory[/Keyboard/i]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -143,6 +148,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 8811399761833536969}
   player: {fileID: 9068226514586619568}
+--- !u!114 &3730619928896117842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782038162481824703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbddd94eed2f3044a5bae8bdd7a9428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 8811399761833536969}
 --- !u!114 &9068226514586619568
 MonoBehaviour:
   m_ObjectHideFlags: 0

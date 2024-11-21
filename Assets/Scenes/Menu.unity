@@ -549,7 +549,6 @@ GameObject:
   - component: {fileID: 152854885}
   - component: {fileID: 152854887}
   - component: {fileID: 152854886}
-  - component: {fileID: 152854888}
   m_Layer: 0
   m_Name: GridContainer
   m_TagString: Untagged
@@ -614,20 +613,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152854884}
   m_CullTransparentMesh: 1
---- !u!114 &152854888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152854884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e448948810e2f40b9259787da974e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridWidth: 12
-  gridHeight: 5
 --- !u!1 &155520419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,8 +1520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0773838b17105f4d89a81c37f99ea30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 875223715}
-  inventory: {fileID: 152854888}
+  gridInventoryUI: {fileID: 875223715}
 --- !u!114 &353980120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1549,7 +1533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f050a411273275c4f94c85a0016b16c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 875223713}
   debugPanel: {fileID: 1938219481}
 --- !u!1 &369504231
 GameObject:
@@ -3354,7 +3337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060941c39d991354497cdd43f263d45e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 152854888}
   cellSize: 50
   spacing: 2
   itemPrefab: {fileID: 8892268253598509920, guid: 96584c43c74a17f44b1e305a120dda97,
@@ -5655,6 +5637,7 @@ MonoBehaviour:
   - {fileID: 2063904666}
   - {fileID: 2001485922}
   - {fileID: 8013040}
+  inventoryPanel: {fileID: 875223714}
 --- !u!1 &1584806266
 GameObject:
   m_ObjectHideFlags: 0

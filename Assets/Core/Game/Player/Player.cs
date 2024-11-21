@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private ActiveAbility majorAbility;
@@ -9,14 +10,18 @@ public class Player : MonoBehaviour
 
     private Character currentCharacter;
     private CharacterClass characterClass;
+    private PlayerInput input;
     private PlayerMovement playerMovement;
 
     private HealthSystem healthSystem;
     private ResourceSystem resourceSystem;
-
+    private GridInventoryUI characterInventoryUI;
     private void Start()
     {
         Boostrap.Instance.TopDownCamera.SetTarget(gameObject.transform);
+
+        input = GetComponent<PlayerInput>();
+        Boostrap.Instance.PlayerData.input = input;
 
         playerMovement = GetComponent<PlayerMovement>();
 
@@ -84,6 +89,9 @@ public class Player : MonoBehaviour
         passiveAbility = currentCharacter.PassiveAbility;
 
         passiveAbility.ApplyEffect(gameObject);
+
+        characterInventoryUI = Boostrap.Instance.InventorySystem.gridInventoryUI;
+        characterInventoryUI.SetInventory(currentCharacter.Inventory);
     }
     public void ApplySkillEffects(Skill skill)
     {

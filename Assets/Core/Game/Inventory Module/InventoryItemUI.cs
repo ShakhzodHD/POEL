@@ -96,7 +96,7 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             Debug.Log("Delete");
-            InventorySystem.Instance.RemoveItem(gameObject, item);
+            //Boostrap.Instance.PlayerData.selectedCharacter.RemoveItemFromInventory(item);
         }
     }
 }

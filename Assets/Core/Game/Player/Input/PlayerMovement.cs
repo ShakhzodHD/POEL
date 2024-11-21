@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             EnhancedTouchSupport.Enable();
         }
 
-        moveAction = playerInput.actions.FindAction("Move");
+        moveAction = playerInput.actions.FindAction(InputActions.Move.ToString());
     }
 
     private void OnEnable()

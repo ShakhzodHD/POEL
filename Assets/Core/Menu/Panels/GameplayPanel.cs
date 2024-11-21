@@ -17,5 +17,6 @@ public class GameplayPanel : MonoBehaviour
     {
         Boostrap.Instance.TimeScaleController.PauseGame();
         Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Pause);
+        Boostrap.Instance.PlayerData.input.SwitchCurrentActionMap("Disable");
     }
 }
