@@ -13,9 +13,13 @@ public class GridInventoryUI : MonoBehaviour
 
     public RectTransform itemsContainer;
 
+    private GridEquip gridEquip;
+
     private InventorySlot[,] slots;
     public void SetInventory(GridInventory newInventory)
     {
+        gridEquip = GetComponent<GridEquip>();
+
         inventory = newInventory;
 
         foreach (Transform child in gridContainer)
@@ -103,6 +107,7 @@ public class GridInventoryUI : MonoBehaviour
         itemRect.pivot = new Vector2(0, 1);
 
         itemUI.Initialize(item, this);
+        gridEquip.Initialize(inventory);
     }
     public void UpdateInventoryUI()
     {

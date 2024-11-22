@@ -7,7 +7,7 @@ public class DebugSystem : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            InventoryItem sword = new("Anus", 1, false, 1, 3);
+            InventoryItem sword = new("Anus", 1, false, 1, 3, TypeSlotEnum.Weapon);
             Boostrap.Instance.PlayerData.selectedCharacter.AddItemToInventory(sword);
         }
         if (Input.GetKeyUp(KeyCode.X))

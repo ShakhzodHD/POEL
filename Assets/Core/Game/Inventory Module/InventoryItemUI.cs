@@ -56,6 +56,7 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             eventData.pressEventCamera,
             out localPoint
         );
+
         rectTransform.anchoredPosition = localPoint;
 
         Vector2Int gridPos = inventoryUI.GetGridPosition(localPoint);
@@ -83,6 +84,7 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             inventoryUI.inventory.PlaceItem(item, gridPos.x, gridPos.y);
             UpdateVisuals();
         }
+
         else
         {
             inventoryUI.inventory.PlaceItem(item, startDragGridPosition.x, startDragGridPosition.y);
@@ -98,5 +100,9 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             Debug.Log("Delete");
             //Boostrap.Instance.PlayerData.selectedCharacter.RemoveItemFromInventory(item);
         }
+    }
+    public BaseInventoryItem GetItem()
+    {
+        return item;
     }
 }
