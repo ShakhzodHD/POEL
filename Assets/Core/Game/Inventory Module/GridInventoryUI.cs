@@ -6,6 +6,9 @@ public class GridInventoryUI : MonoBehaviour
     public float cellSize = 50f;
     public float spacing = 2f;
 
+    public RectTransform dragContainer;
+    public InventoryEquipmentManager manager;
+
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private GameObject slotPrefab;
 
@@ -106,7 +109,7 @@ public class GridInventoryUI : MonoBehaviour
         itemRect.anchorMax = new Vector2(0, 1);
         itemRect.pivot = new Vector2(0, 1);
 
-        itemUI.Initialize(item, this);
+        itemUI.Initialize(item, this, gridEquip, manager);
         gridEquip.Initialize(inventory);
     }
     public void UpdateInventoryUI()

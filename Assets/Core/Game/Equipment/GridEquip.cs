@@ -13,10 +13,6 @@ public class GridEquip : MonoBehaviour
     {
         inventory = inv;
 
-        equipmentSlots[TypeSlotEnum.Weapon] = weaponSlot;
-        equipmentSlots[TypeSlotEnum.Armor] = armorSlot;
-        equipmentSlots[TypeSlotEnum.Gloves] = glovesSlot;
-
         foreach (var slot in equipmentSlots.Values)
         {
             slot.Initialize(this);
@@ -32,16 +28,32 @@ public class GridEquip : MonoBehaviour
     }
     public void EquipItem(BaseInventoryItem item)
     {
+        // Проверяем, что предмет не экипирован
+        if (IsEquipped(item))
+        {
+            Debug.Log($"Предмет {item} уже экипирован.");
+            return;
+        }
+
         if (equipmentSlots.TryGetValue(item.typeItem, out var slot))
         {
             var currentItem = slot.GetEquippedItem();
             if (currentItem != null)
             {
+                // Сначала снимаем текущий предмет
                 UnequipItem(currentItem);
             }
 
-            slot.EquipItem(item);
-            Debug.Log($"Equipped item of type {item.typeItem}");
+            // Проверяем, что слот действительно пустой
+            if (slot.GetEquippedItem() == null)
+            {
+                slot.EquipItem(item);
+                Debug.Log($"Предмет успешно экипирован в слот {item.typeItem}");
+            }
+            else
+            {
+                Debug.LogError("Failed to unequip current item!");
+            }
         }
     }
     public void UnequipItem(BaseInventoryItem item)
@@ -50,11 +62,17 @@ public class GridEquip : MonoBehaviour
         {
             if (slot.GetEquippedItem() == item)
             {
-                slot.UnequipItem();
-                if (!inventory.TryPlaceItem(item))
+                // Сначала проверяем, можно ли положить предмет в инвентарь
+                if (inventory.TryPlaceItem(item))
                 {
-                    Debug.LogWarning("No space in inventory for unequipped item!");
-                    // Здесь можно добавить логику для случая, когда нет места в инвентаре
+                    slot.UnequipItem();
+                    Debug.Log($"Предмет успешно снят и помещен в инвентарь");
+                }
+                else
+                {
+                    Debug.LogWarning("Нет места в инвентаре для снятого предмета!");
+                    return;
+                    // Можно добавить дополнительную логику здесь
                 }
             }
         }

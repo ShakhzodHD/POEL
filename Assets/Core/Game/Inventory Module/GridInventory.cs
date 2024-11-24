@@ -10,7 +10,11 @@ public class GridInventory
     private bool[,] occupiedCells;
     private List<BaseInventoryItem> items = new();
     public List<BaseInventoryItem> Items => items;
+
     public event Action OnPlaceItem;
+
+    public event Action<BaseInventoryItem> OnItemRemoved;
+    public event Action<BaseInventoryItem> OnItemAdded;
     public void InitializeGrid()
     {
         occupiedCells = new bool[gridWidth, gridHeight];
@@ -78,5 +82,20 @@ public class GridInventory
 
         items.Remove(item);
         item.position = new Vector2Int(-1, -1);
+    }
+    public bool CanFindSpaceForItem(BaseInventoryItem item)
+    {
+        // Проверяем каждую позицию в сетке
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                if (CanPlaceItem(item, x, y))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

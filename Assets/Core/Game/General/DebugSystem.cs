@@ -10,6 +10,11 @@ public class DebugSystem : MonoBehaviour
             InventoryItem sword = new("Anus", 1, false, 1, 3, TypeSlotEnum.Weapon);
             Boostrap.Instance.PlayerData.selectedCharacter.AddItemToInventory(sword);
         }
+        if (Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            InventoryItem sword = new("Anus2", 2, false, 1, 3, TypeSlotEnum.Weapon);
+            Boostrap.Instance.PlayerData.selectedCharacter.AddItemToInventory(sword);
+        }
         if (Input.GetKeyUp(KeyCode.X))
         {
             debugPanel.SetActive(!debugPanel.activeSelf);
