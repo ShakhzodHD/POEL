@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
 
     private HealthSystem healthSystem;
     private ResourceSystem resourceSystem;
-    private GridInventoryUI characterInventoryUI;
     private void Start()
     {
         Boostrap.Instance.TopDownCamera.SetTarget(gameObject.transform);
@@ -86,9 +85,6 @@ public class Player : MonoBehaviour
         passiveAbility = currentCharacter.PassiveAbility;
 
         passiveAbility.ApplyEffect(gameObject);
-
-        characterInventoryUI = Boostrap.Instance.InventorySystem.gridInventoryUI;
-        characterInventoryUI.SetInventory(currentCharacter.Inventory);
     }
     public void ApplySkillEffects(Skill skill)
     {
