@@ -63,7 +63,6 @@ public class GridInventory
 
         item.position = new Vector2Int(x, y);
         items.Add(item);
-        Debug.Log($"Добавлен предмет {item.ToString()}");
 
         OnPlaceItem?.Invoke();
     }
@@ -85,7 +84,6 @@ public class GridInventory
     }
     public bool CanFindSpaceForItem(BaseInventoryItem item)
     {
-        // Проверяем каждую позицию в сетке
         for (int y = 0; y < gridHeight; y++)
         {
             for (int x = 0; x < gridWidth; x++)

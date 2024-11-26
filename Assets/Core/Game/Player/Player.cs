@@ -50,9 +50,9 @@ public class Player : MonoBehaviour
         currentCharacter.ExperienceToNextLevel = experienceToNextLevel;
     }
 
-    private void Update() // Временно
+    private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.T)) // Открыть панель c улучшениями
+        if (Input.GetKeyUp(KeyCode.T)) 
         {
             Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.Upgrade);
         }
@@ -74,9 +74,6 @@ public class Player : MonoBehaviour
         Boostrap.Instance.ExperienceSystem.Initialize();
         Boostrap.Instance.ExperienceSystem.OnExperienceGained += OnExperienceGained;
         Boostrap.Instance.ExperienceSystem.OnLevelUp += OnLevelUp;
-
-        Debug.Log("Макс здоровье: " + healthSystem.MaxHealth + " Текущее здоровье: " + healthSystem.CurrentHealth);
-        Debug.Log("Макс ресурс: " + resourceSystem.MaxResource + " Текущи ресурс: " + resourceSystem.MaxResource);
 
         foreach (var stat in currentCharacter.Stats.stats)
         {
@@ -104,17 +101,17 @@ public class Player : MonoBehaviour
             case AbilitySlotType.Major:
                 if (majorAbility != null)
                 {
-                    Debug.Log("Мажор");
+                    Debug.Log("Major");
                     if (CanUseAbility(majorAbility))
                         majorAbility.Activate(gameObject);
-                    else { Debug.Log("Недостаточно ресурса"); }
+                    else { Debug.Log("Not enouth resourse"); }
                 }
                 break;
 
             case AbilitySlotType.Minor:
                 if (minorAbility != null)
                 {
-                    Debug.Log("Минор");
+                    Debug.Log("Minor");
                     if (CanUseAbility(minorAbility))
                         minorAbility.Activate(gameObject);
                 }
@@ -123,7 +120,7 @@ public class Player : MonoBehaviour
             case AbilitySlotType.Escape:
                 if (escapeAbility != null)
                 {
-                    Debug.Log("Ескейп");
+                    Debug.Log("Escape");
                     if (CanUseAbility(escapeAbility))
                         escapeAbility.Activate(gameObject);
                 }
@@ -136,7 +133,6 @@ public class Player : MonoBehaviour
         return resourceSystem.Consume(ability.resourceCost);
     }
 
-    // Метод для назначения способности в слот
     public bool AssignAbilityToSlot(Ability ability, AbilitySlotType slotType)
     {
         switch (slotType)
@@ -163,7 +159,6 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    // Вспомогательный метод для назначения активных способностей в слоты
     private void AssignActiveAbilityToSlot(ActiveAbility activeAbility, AbilitySlotType slotType)
     {
         switch (slotType)

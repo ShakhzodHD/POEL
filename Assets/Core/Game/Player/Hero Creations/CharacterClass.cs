@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCharacterClass", menuName = "Character/CharacterClass")]
 public class CharacterClass : ScriptableObject
 {
-    public string className;  // Название класса
-    public Sprite classIcon;  // Иконка для UI
-    public string description;  // Описание класса
+    public string className;
+    public Sprite classIcon;
+    public string description;
 
     public ActiveAbility[] startingMajorAbilities;
     public ActiveAbility[] startingMinorAbilities;

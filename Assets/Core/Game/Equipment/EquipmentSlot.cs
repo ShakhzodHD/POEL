@@ -6,8 +6,8 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
 {
     public TypeSlotEnum slotType;
 
-    [SerializeField] private Image slotIcon; // базовая иконка слота
-    [SerializeField] private Image itemIcon; // иконка экипированного предмета
+    [SerializeField] private Image slotIcon;
+    [SerializeField] private Image itemIcon;
 
     [SerializeField] private GridEquip gridEquip;
 
@@ -24,7 +24,6 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
             slotIcon = GetComponent<Image>();
         }
 
-        // Скрываем только иконку предмета, иконка слота всегда видима
         if (itemIcon != null)
         {
             itemIcon.enabled = false;
@@ -47,27 +46,21 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
             var newItem = itemUI.GetItem();
             if (newItem != null && newItem.typeItem == slotType)
             {
-                // Проверяем, не тот же ли это предмет
                 if (equippedItem == newItem)
                 {
-                    Debug.Log("Этот предмет уже экипирован");
                     return;
                 }
 
-                // Если в слоте уже есть предмет, сначала снимаем его
                 if (equippedItem != null)
                 {
-                    // Важно: сначала снять текущий предмет
-                    var currentEquippedItem = equippedItem; // сохраняем ссылку
-                    UnequipItem(); // очищаем слот
-                    gridEquip.UnequipItem(currentEquippedItem); // возвращаем в инвентарь
+                    var currentEquippedItem = equippedItem;
+                    UnequipItem();
+                    gridEquip.UnequipItem(currentEquippedItem);
                 }
 
-                // Теперь экипируем новый предмет
                 EquipItem(newItem);
                 itemUI.isEquipped = true;
 
-                // Настраиваем позицию предмета в слоте
                 itemUI.transform.SetParent(transform);
                 RectTransform itemRect = itemUI.GetComponent<RectTransform>();
                 if (itemRect != null)
@@ -83,7 +76,6 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
 
     public void EquipItem(BaseInventoryItem item)
     {
-        // Проверяем, нет ли уже экипированного предмета
         if (equippedItem != null)
         {
             Debug.LogWarning("Attempting to equip item when slot is not empty!");
@@ -91,7 +83,6 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         }
 
         equippedItem = item;
-        Debug.Log($"Экипирован предмет: {equippedItem} в слот {slotType}");
 
         if (itemIcon != null)
         {
@@ -108,7 +99,6 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
     {
         if (equippedItem != null)
         {
-            Debug.Log($"Снят предмет из слота {slotType}");
             var itemUI = GetEquippedItemUI();
             if (itemUI != null)
             {
@@ -139,7 +129,6 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
     }
     private InventoryItemUI GetEquippedItemUI()
     {
-        // Ищем InventoryItemUI среди дочерних объектов
         return GetComponentInChildren<InventoryItemUI>();
     }
 
@@ -150,8 +139,6 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
 
     public void OnItemTakenFromSlot()
     {
-        Debug.Log("Предмет был взят из слота");
-        //equippedItem = null;
         if (itemIcon != null)
         {
             itemIcon.enabled = false;

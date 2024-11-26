@@ -28,10 +28,8 @@ public class GridEquip : MonoBehaviour
     }
     public void EquipItem(BaseInventoryItem item)
     {
-        // Проверяем, что предмет не экипирован
         if (IsEquipped(item))
         {
-            Debug.Log($"Предмет {item} уже экипирован.");
             return;
         }
 
@@ -40,15 +38,12 @@ public class GridEquip : MonoBehaviour
             var currentItem = slot.GetEquippedItem();
             if (currentItem != null)
             {
-                // Сначала снимаем текущий предмет
                 UnequipItem(currentItem);
             }
 
-            // Проверяем, что слот действительно пустой
             if (slot.GetEquippedItem() == null)
             {
                 slot.EquipItem(item);
-                Debug.Log($"Предмет успешно экипирован в слот {item.typeItem}");
             }
             else
             {
@@ -62,17 +57,13 @@ public class GridEquip : MonoBehaviour
         {
             if (slot.GetEquippedItem() == item)
             {
-                // Сначала проверяем, можно ли положить предмет в инвентарь
                 if (inventory.TryPlaceItem(item))
                 {
                     slot.UnequipItem();
-                    Debug.Log($"Предмет успешно снят и помещен в инвентарь");
                 }
                 else
                 {
-                    Debug.LogWarning("Нет места в инвентаре для снятого предмета!");
                     return;
-                    // Можно добавить дополнительную логику здесь
                 }
             }
         }

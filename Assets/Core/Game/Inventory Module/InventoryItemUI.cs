@@ -13,7 +13,6 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private GridInventoryUI inventoryUI;
     private GridEquip gridEquip;
     private EquipmentSlot currentEquipSlot;
-    private InventoryEquipmentManager manager;
 
     private Vector2 originalPosition;
     private Vector2Int startDragGridPosition;
@@ -25,12 +24,11 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
     }
 
-    public void Initialize(BaseInventoryItem item, GridInventoryUI ui, GridEquip equipSystem, InventoryEquipmentManager manager)
+    public void Initialize(BaseInventoryItem item, GridInventoryUI ui, GridEquip equipSystem)
     {
         this.item = item;
         inventoryUI = ui;
         gridEquip = equipSystem;
-        this.manager = manager;
         UpdateVisuals();
     }
 
@@ -59,7 +57,6 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         if (!isEquipped)
         {
-            // Убедимся, что предмет находится в контейнере инвентаря
             if (transform.parent != GetInventoryContainer())
             {
                 transform.SetParent(GetInventoryContainer());
@@ -75,11 +72,9 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (isEquipped)
         {
-            // Проверяем, есть ли место в инвентаре перед началом перетаскивания
             if (!inventoryUI.inventory.CanFindSpaceForItem(item))
             {
-                Debug.LogWarning("Нет места в инвентаре для снятия предмета!");
-                return; // Отменяем начало перетаскивания
+                return;
             }
         }
 
@@ -115,7 +110,6 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         if (!isEquipped)
         {
-            // Проверяем возможность размещения в инвентаре только если предмет не экипирован
             Vector2Int gridPos = inventoryUI.GetGridPosition(localPoint);
             bool canPlace = inventoryUI.inventory.CanPlaceItem(item, gridPos.x, gridPos.y);
             inventoryUI.HighlightSlots(item, gridPos, canPlace);
@@ -127,7 +121,6 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        // Проверяем, находится ли курсор над слотом экипировки
         var results = new System.Collections.Generic.List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
@@ -138,7 +131,6 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             EquipmentSlot equipSlot = result.gameObject.GetComponent<EquipmentSlot>();
             if (equipSlot != null && equipSlot.slotType == item.typeItem)
             {
-                // Экипируем предмет
                 gridEquip.EquipItem(item);
                 SetEquipSlot(equipSlot);
                 placed = true;
@@ -148,7 +140,6 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         if (!placed)
         {
-            // Пытаемся разместить в инвентаре
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 inventoryUI.itemsContainer,
@@ -168,7 +159,6 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             }
             else
             {
-                // Возвращаем предмет на исходную позицию
                 transform.SetParent(originalParent);
                 if (isEquipped)
                 {

@@ -1625,8 +1625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11966874920c0042a331329bf1dc8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 875223715}
-  equipSystem: {fileID: 875223716}
+  _inventoryUI: {fileID: 875223715}
+  _equipSystem: {fileID: 875223716}
 --- !u!1 &369504231
 GameObject:
   m_ObjectHideFlags: 0

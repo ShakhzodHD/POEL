@@ -52,9 +52,5 @@ public class Boostrap : MonoBehaviour
         GameState = gameState;
         OnGameStateChanged?.Invoke(gameState);
         //if (GameState == GameStates.LevelComplete)
-        //{
-        //    Debug.Log("Вы прошли уровень");
-        //    // Логика после прохождения уровня
-        //}
     }
 }
