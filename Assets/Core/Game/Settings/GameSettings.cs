@@ -3,10 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameSettings", menuName = "Settings/Game Settings")]
 public class GameSettings : ScriptableObject
 {
-    [Header("PREFABS")]
+    [Header("Prefabs")]
     public GameObject PlayerPrefab;
     public GameObject[] WeaponsPrefabs;
 
-    [Header("SOUNDS")]
+    [Header("Sounds")]
     public AudioClip PistolShootSound;
+
+    [Header("Inventory")]
+    public int inventoryColumn;
+    public int inventoryRow;
 }

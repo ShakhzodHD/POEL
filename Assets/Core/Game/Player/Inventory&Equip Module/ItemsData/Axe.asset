@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7caf5ed7e2be14a8510921537d02ed, type: 3}
-  m_Name: GameSettings
+  m_Script: {fileID: 11500000, guid: 05b942fd515b1144ab8b303b5633bdc0, type: 3}
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 1782038162481824703, guid: 02742de744f323f409932f61f8c87038,
-    type: 3}
-  WeaponsPrefabs: []
-  PistolShootSound: {fileID: 0}
-  inventoryColumn: 10
-  inventoryRow: 6
+  ItemName: Axe
+  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Type: 0
+  Row: 4
+  Column: 2
+  Rarity: 0

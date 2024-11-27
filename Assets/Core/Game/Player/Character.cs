@@ -18,10 +18,12 @@ public class Character
     public int Level { get; set; }
     public int CurrentExperience { get; set; }
     public int ExperienceToNextLevel { get; set; }
+    public Inventory Inventory { get; set; }
+    public Equipment Equipment { get; set; }
 
     public Character(int id, string name, 
         CharacterClass characterClass, ActiveAbility major, ActiveAbility minor, ActiveAbility escape, PassiveAbility passive,
-        float maxHealth, float maxResource, float movementSpeed, Stats stats)
+        float maxHealth, float maxResource, float movementSpeed, Stats stats, int inventoryColumn, int inventoryRow)
     {
         Name = name;
         CharacterClass = characterClass;
@@ -39,6 +41,8 @@ public class Character
         Level = 0;
         CurrentExperience = 0;
         ExperienceToNextLevel = 0;
+        Inventory = new(inventoryColumn, inventoryRow);
+        Equipment = new();
     }
     public void AddSkillPoints(int points)
     {

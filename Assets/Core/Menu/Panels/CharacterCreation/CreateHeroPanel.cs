@@ -145,7 +145,9 @@ public class CreateHeroPanel : MonoBehaviour
             selectedClass.baseHealth,
             selectedClass.baseResource,
             selectedClass.baseSpeed,
-            selectedClass.BaseStats
+            selectedClass.BaseStats,
+            Boostrap.Instance.GameSettings.inventoryColumn,
+            Boostrap.Instance.GameSettings.inventoryRow
         );
 
         idCharacters++;

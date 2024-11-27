@@ -85,6 +85,8 @@ public class Player : MonoBehaviour
         passiveAbility = currentCharacter.PassiveAbility;
 
         passiveAbility.ApplyEffect(gameObject);
+
+        Boostrap.Instance.InventoryManager.Initialize(currentCharacter.Inventory, currentCharacter.Equipment);
     }
     public void ApplySkillEffects(Skill skill)
     {
