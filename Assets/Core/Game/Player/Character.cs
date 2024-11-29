@@ -18,8 +18,6 @@ public class Character
     public int Level { get; set; }
     public int CurrentExperience { get; set; }
     public int ExperienceToNextLevel { get; set; }
-    public Inventory Inventory { get; set; }
-    public Equipment Equipment { get; set; }
 
     public Character(int id, string name, 
         CharacterClass characterClass, ActiveAbility major, ActiveAbility minor, ActiveAbility escape, PassiveAbility passive,
@@ -41,8 +39,6 @@ public class Character
         Level = 0;
         CurrentExperience = 0;
         ExperienceToNextLevel = 0;
-        Inventory = new(inventoryColumn, inventoryRow);
-        Equipment = new();
     }
     public void AddSkillPoints(int points)
     {
@@ -68,13 +64,4 @@ public class Character
         }
         return SkillPoints >= skill.cost;
     }
-    //public bool AddItemToInventory(BaseInventoryItem item)
-    //{
-    //    return Inventory.TryPlaceItem(item);
-    //}
-
-    //public void RemoveItemFromInventory(BaseInventoryItem item)
-    //{
-    //    Inventory.RemoveItem(item);
-    //}
 }
