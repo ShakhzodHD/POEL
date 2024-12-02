@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "Settings/Game Settings")]
@@ -9,8 +10,4 @@ public class GameSettings : ScriptableObject
 
     [Header("Sounds")]
     public AudioClip PistolShootSound;
-
-    [Header("Inventory")]
-    public int inventoryColumn;
-    public int inventoryRow;
 }

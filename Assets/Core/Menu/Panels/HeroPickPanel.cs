@@ -32,7 +32,7 @@ public class HeroPickPanel : MonoBehaviour
             if (i < characters.Count)
             {
                 var character = characters[i];
-                heroSlots[i].GetComponentInChildren<Text>().text = character.Name; // Имя персонажа
+                heroSlots[i].GetComponentInChildren<Text>().text = character.Name;
                 heroSlots[i].onClick.RemoveAllListeners();
                 heroSlots[i].onClick.AddListener(() => StartGameWithCharacter(character));
 

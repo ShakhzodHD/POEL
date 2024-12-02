@@ -747,7 +747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &182484092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1509,6 +1509,7 @@ GameObject:
   - component: {fileID: 353980117}
   - component: {fileID: 353980118}
   - component: {fileID: 353980120}
+  - component: {fileID: 353980121}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1556,6 +1557,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugPanel: {fileID: 1938219481}
+  weapon: {fileID: 11400000, guid: 4f1f594453c99794da4ef79077e209c4, type: 2}
+--- !u!114 &353980121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353980116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d081963b99d79d48a488ccf51db191a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainInventory: {fileID: 1420558401}
 --- !u!1 &369504231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2942,41 +2957,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731243859}
   m_CullTransparentMesh: 1
---- !u!1 &735836022
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 735836023}
-  m_Layer: 0
-  m_Name: 'DragContainer '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &735836023
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735836022}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1130426362}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &779217457
 GameObject:
   m_ObjectHideFlags: 0
@@ -4330,7 +4310,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 735836023}
   - {fileID: 2030427702}
   - {fileID: 422978303}
   - {fileID: 1454010011}
@@ -5265,7 +5244,7 @@ GameObject:
   - component: {fileID: 1420558404}
   - component: {fileID: 1420558403}
   m_Layer: 0
-  m_Name: Inventory
+  m_Name: MainInventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5310,7 +5289,6 @@ MonoBehaviour:
   height: 4
   _definitions:
   - {fileID: 11400000, guid: 4f1f594453c99794da4ef79077e209c4, type: 2}
-  fillRandomly: 1
   fillEmpty: 0
 --- !u!114 &1420558403
 MonoBehaviour:
@@ -5324,7 +5302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007d46fa0d2a9c3408ad16cd30d02841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryRenderer: {fileID: 0}
+  inventoryRenderer: {fileID: 1420558404}
 --- !u!114 &1420558404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5789,7 +5767,7 @@ MonoBehaviour:
   - {fileID: 2063904666}
   - {fileID: 2001485922}
   - {fileID: 8013040}
-  inventoryPanel: {fileID: 0}
+  mainInventoryPanel: {fileID: 182484092}
 --- !u!1 &1584806266
 GameObject:
   m_ObjectHideFlags: 0

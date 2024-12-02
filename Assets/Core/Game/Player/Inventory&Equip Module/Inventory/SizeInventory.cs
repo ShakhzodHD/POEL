@@ -3,35 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(InventoryRenderer))]
 public class SizeInventory : MonoBehaviour
 {
-    [SerializeField] private InventoryRenderMode renderMode = InventoryRenderMode.Grid;
-    [SerializeField] private int maximumAlowedItemCount = -1;
-    [SerializeField] private ItemType allowedItem = ItemType.Any;
-    [SerializeField] private int width = 8;
-    [SerializeField] private int height = 4;
-    [SerializeField] private ItemDefinition[] _definitions = null;
-    [SerializeField] private bool fillRandomly = true;
-    [SerializeField] private bool fillEmpty = false;
-    private void Start()
+    public InventoryRenderMode renderMode = InventoryRenderMode.Grid;
+    public int maximumAlowedItemCount = -1;
+    public ItemType allowedItem = ItemType.Any;
+
+    public int width = 8;
+    public int height = 4;
+    public void SetInventory(InventoryProvider provider, InventoryManager inventory)
     {
-        var provider = new InventoryProvider(renderMode, maximumAlowedItemCount, allowedItem);
-        var inventory = new InventoryManager(provider, width, height);
-
-        if (fillRandomly)
-        {
-            var tries = (width * height) / 3;
-            for (var i = 0; i < tries; i++)
-            {
-                inventory.TryAdd(_definitions[Random.Range(0, _definitions.Length)].CreateInstance());
-            }
-        }
-        if (fillEmpty)
-        {
-            for (var i = 0; i < width * height; i++)
-            {
-                inventory.TryAdd(_definitions[0].CreateInstance());
-            }
-        }
-
         GetComponent<InventoryRenderer>().SetInventory(inventory, provider.InventoryRenderMode);
 
         inventory.OnItemDropped += (item) =>

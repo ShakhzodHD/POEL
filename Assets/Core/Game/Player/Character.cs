@@ -18,10 +18,12 @@ public class Character
     public int Level { get; set; }
     public int CurrentExperience { get; set; }
     public int ExperienceToNextLevel { get; set; }
+    public InventoryProvider InventoryProvider { get; private set; }
+    public InventoryManager InventoryManager { get; private set; }
 
     public Character(int id, string name, 
         CharacterClass characterClass, ActiveAbility major, ActiveAbility minor, ActiveAbility escape, PassiveAbility passive,
-        float maxHealth, float maxResource, float movementSpeed, Stats stats, int inventoryColumn, int inventoryRow)
+        float maxHealth, float maxResource, float movementSpeed, Stats stats, SizeInventory mainInventory)
     {
         Name = name;
         CharacterClass = characterClass;
@@ -39,6 +41,8 @@ public class Character
         Level = 0;
         CurrentExperience = 0;
         ExperienceToNextLevel = 0;
+        InventoryProvider = new(mainInventory.renderMode, mainInventory.maximumAlowedItemCount, mainInventory.allowedItem);
+        InventoryManager = new InventoryManager(InventoryProvider, mainInventory.width, mainInventory.height);
     }
     public void AddSkillPoints(int points)
     {

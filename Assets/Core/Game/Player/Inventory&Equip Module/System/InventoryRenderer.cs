@@ -45,7 +45,6 @@ public class InventoryRenderer : MonoBehaviour
         OnDisable();
         inventory = inventoryManager ?? throw new ArgumentNullException(nameof(inventoryManager));
         this.renderMode = renderMode;
-        OnEnable();
     }
     private void OnEnable()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 public class Boostrap : MonoBehaviour
 {
     public static Boostrap Instance { get; private set; }
-    public readonly GameEvents GameEvents = new GameEvents();
+    public readonly GameEvents GameEvents = new();
     public UIManager UIManager { get; private set; }
     public ScenesService ScenesService { get; private set; }
     public GameStates GameState { get; private set; } = GameStates.InMenu;
@@ -14,6 +14,7 @@ public class Boostrap : MonoBehaviour
     public PlayerData PlayerData { get; private set; }
     public TimeScaleController TimeScaleController { get; private set; }
     public ExperienceSystem ExperienceSystem { get; set; }
+    public InventoryBundle InventoryBundle { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -38,6 +39,7 @@ public class Boostrap : MonoBehaviour
         TopDownCamera = FindObjectOfType<TopDownCamera>();
         PlayerData = FindObjectOfType<PlayerData>();
         TimeScaleController = FindObjectOfType<TimeScaleController>();
+        InventoryBundle = FindObjectOfType<InventoryBundle>();
     }
     private void OnLevelLoaded()
     {
@@ -49,6 +51,5 @@ public class Boostrap : MonoBehaviour
         if (GameState == gameState && GameState != GameStates.InProgress) return;
         GameState = gameState;
         OnGameStateChanged?.Invoke(gameState);
-        //if (GameState == GameStates.LevelComplete)
     }
 }

@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private List<GameObject> panels;
 
-    [SerializeField] private RectTransform inventoryPanel;
+    [SerializeField] private RectTransform mainInventoryPanel;
 
     private MenuStates _menuStates = MenuStates.StartMenu;
 
@@ -56,10 +56,10 @@ public class UIManager : MonoBehaviour
 
     public void ToggleInventory()
     {
-        if (inventoryPanel != null)
+        if (mainInventoryPanel != null)
         {
-            bool isActive = inventoryPanel.gameObject.activeSelf;
-            inventoryPanel.gameObject.SetActive(!isActive);
+            bool isActive = mainInventoryPanel.gameObject.activeSelf;
+            mainInventoryPanel.gameObject.SetActive(!isActive);
 
             //Cursor.lockState = isActive ? CursorLockMode.Locked : CursorLockMode.None;
             //Cursor.visible = !isActive;
@@ -67,6 +67,6 @@ public class UIManager : MonoBehaviour
     }
     private void CloseInventory()
     {
-        if (inventoryPanel != null) inventoryPanel.gameObject.SetActive(false);
+        if (mainInventoryPanel != null) mainInventoryPanel.gameObject.SetActive(false);
     }
 }
