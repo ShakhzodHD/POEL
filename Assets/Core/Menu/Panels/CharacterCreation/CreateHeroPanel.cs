@@ -134,6 +134,10 @@ public class CreateHeroPanel : MonoBehaviour
 
     private void CompleteCharacterCreation()
     {
+        Boostrap.Instance.InventoryBundle.CreateMainInventory(out InventoryProvider mainProvider, out InventoryManager mainInventory);
+        Boostrap.Instance.InventoryBundle.CreateEquipment(out InventoryProvider[] equipProviders, out InventoryManager[] equipManagers);
+        Equipments equipment = new(equipManagers, equipProviders);
+
         var newCharacter = new Character(
             id: idCharacters,
             selectedClass.name,
@@ -146,12 +150,15 @@ public class CreateHeroPanel : MonoBehaviour
             selectedClass.baseResource,
             selectedClass.baseSpeed,
             selectedClass.BaseStats,
-            Boostrap.Instance.InventoryBundle.mainInventory
+            mainInventory,
+            mainProvider,
+            equipment
         );
 
         idCharacters++;
 
         Boostrap.Instance.PlayerData.AddCharacter(newCharacter);
+
         Boostrap.Instance.UIManager.ChangeMenuState(MenuStates.HeroPick);
 
         Boostrap.Instance.PlayerData.abilityMajor = null;

@@ -83,10 +83,10 @@ public class Player : MonoBehaviour
         minorAbility = currentCharacter.MinorAbility;
         escapeAbility = currentCharacter.EscapeAbility;
         passiveAbility = currentCharacter.PassiveAbility;
-
         passiveAbility.ApplyEffect(gameObject);
 
-        Boostrap.Instance.InventoryBundle.mainInventory.SetInventory(currentCharacter.InventoryProvider, currentCharacter.InventoryManager);
+        Boostrap.Instance.InventoryBundle.SetMainInventory(currentCharacter);
+        Boostrap.Instance.InventoryBundle.SetEquipment(currentCharacter);
     }
     public void ApplySkillEffects(Skill skill)
     {

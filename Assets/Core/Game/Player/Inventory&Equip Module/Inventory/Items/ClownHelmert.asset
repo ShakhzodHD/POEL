@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19d62aebe71ea504c97aac3053ec4d1e, type: 3}
-  m_Name: Anus
+  m_Name: ClownHelmert
   m_EditorClassIdentifier: 
-  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   shape:
     width: 2
     height: 2
     shape: 01010101
-  type: 2
+  type: 1
   canDrop: 1
   position: {x: 0, y: 0}

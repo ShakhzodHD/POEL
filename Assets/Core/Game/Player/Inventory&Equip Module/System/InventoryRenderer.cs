@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class InventoryRenderer : MonoBehaviour
 {
-    [SerializeField] private Vector2Int cellSize = new Vector2Int(32, 32);
+    [SerializeField] private Vector2Int cellSize = new(32, 32);
     [SerializeField] private Sprite cellSpriteEmpty = null;
     [SerializeField] private Sprite cellSpriteSelected = null;
     [SerializeField] private Sprite cellSpriteBlocked = null;

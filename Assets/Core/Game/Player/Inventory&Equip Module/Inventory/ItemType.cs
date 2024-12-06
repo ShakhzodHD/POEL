@@ -1,6 +1,10 @@
 public enum ItemType
 {
     Any,
+    Helmert,
     Weapons,
-    Utility,
+    Gloves,
+    Boots,
+    Ring,
+    Necklace
 }

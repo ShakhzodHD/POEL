@@ -5,7 +5,7 @@ public class ItemDefinition : ScriptableObject, IInventoryItem
 {
     [SerializeField] private Sprite sprite = null;
     [SerializeField] private InventoryShape shape = null;
-    [SerializeField] private ItemType type = ItemType.Utility;
+    [SerializeField] private ItemType type = ItemType.Any;
     [SerializeField] private bool canDrop = true;
     [SerializeField, HideInInspector] private Vector2Int position = Vector2Int.zero;
 
