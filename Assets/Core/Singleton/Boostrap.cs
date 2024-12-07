@@ -10,11 +10,14 @@ public class Boostrap : MonoBehaviour
     public GameStates GameState { get; private set; } = GameStates.InMenu;
     public event Action<GameStates> OnGameStateChanged;
     public GameSettings GameSettings { get; private set; }
+    public Camera Camera { get; private set; }
     public TopDownCamera TopDownCamera { get; private set; }
     public PlayerData PlayerData { get; private set; }
+    public PlayerSpawnerService PlayerSpawnerService { get; private set; }
     public TimeScaleController TimeScaleController { get; private set; }
     public ExperienceSystem ExperienceSystem { get; set; }
     public InventoryBundle InventoryBundle { get; private set; }
+    public InteractionManager InteractionManager { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -40,6 +43,9 @@ public class Boostrap : MonoBehaviour
         PlayerData = FindObjectOfType<PlayerData>();
         TimeScaleController = FindObjectOfType<TimeScaleController>();
         InventoryBundle = FindObjectOfType<InventoryBundle>();
+        PlayerSpawnerService = FindObjectOfType<PlayerSpawnerService>();
+        InteractionManager = FindObjectOfType<InteractionManager>();
+        Camera = FindObjectOfType<Camera>();
     }
     private void OnLevelLoaded()
     {

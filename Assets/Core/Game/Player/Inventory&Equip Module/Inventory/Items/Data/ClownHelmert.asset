@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d62aebe71ea504c97aac3053ec4d1e, type: 3}
   m_Name: ClownHelmert
   m_EditorClassIdentifier: 
+  physicalObj: {fileID: 536877287224139785, guid: d525d8150c10f494c8f8e643c8ff086b,
+    type: 3}
   sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   shape:
     width: 2

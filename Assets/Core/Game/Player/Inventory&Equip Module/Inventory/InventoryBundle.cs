@@ -41,6 +41,8 @@ public class InventoryBundle : MonoBehaviour
             inventory.OnItemDropped += (item) =>
             {
                 Debug.Log((item as ItemDefinition).Name + " was dropped on the ground");
+
+                Boostrap.Instance.InteractionManager.DropItem(item as ItemDefinition);
             };
 
             inventory.OnItemDroppedFailed += (item) =>
@@ -73,6 +75,8 @@ public class InventoryBundle : MonoBehaviour
         inventory.OnItemDropped += (item) =>
         {
             Debug.Log((item as ItemDefinition).Name + " was dropped on the ground");
+
+            Boostrap.Instance.InteractionManager.DropItem(item as ItemDefinition);
         };
 
         inventory.OnItemDroppedFailed += (item) =>

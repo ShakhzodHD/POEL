@@ -7,5 +7,6 @@ public class PlayerSpawnerService : MonoBehaviour
     private void Awake()
     {
         Player = Instantiate(Boostrap.Instance.GameSettings.PlayerPrefab, transform.position, transform.rotation, transform).GetComponent<Player>();
+        Boostrap.Instance.InteractionManager.Initialize(Player.transform);
     }
 }

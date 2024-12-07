@@ -915,7 +915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &182484092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1769,6 +1769,8 @@ GameObject:
   - component: {fileID: 353980118}
   - component: {fileID: 353980120}
   - component: {fileID: 353980121}
+  - component: {fileID: 353980122}
+  - component: {fileID: 353980123}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1838,6 +1840,32 @@ MonoBehaviour:
   - {fileID: 312066729}
   - {fileID: 567578135}
   - {fileID: 1658111260}
+  sizeSlotEquip: {x: 1, y: 1}
+--- !u!114 &353980122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353980116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f936b8176b235549824c01cf0fb5048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &353980123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353980116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105e65ef3ca117a4a8b18af431a60892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 96179556}
 --- !u!1 &369504231
 GameObject:
   m_ObjectHideFlags: 0
