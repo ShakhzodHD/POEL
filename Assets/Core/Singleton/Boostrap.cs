@@ -18,6 +18,7 @@ public class Boostrap : MonoBehaviour
     public ExperienceSystem ExperienceSystem { get; set; }
     public InventoryBundle InventoryBundle { get; private set; }
     public InteractionManager InteractionManager { get; private set; }
+    public CentralizedClickHandler CentralizedClickHandler { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -46,6 +47,7 @@ public class Boostrap : MonoBehaviour
         PlayerSpawnerService = FindObjectOfType<PlayerSpawnerService>();
         InteractionManager = FindObjectOfType<InteractionManager>();
         Camera = FindObjectOfType<Camera>();
+        CentralizedClickHandler = FindObjectOfType<CentralizedClickHandler>();
     }
     private void OnLevelLoaded()
     {

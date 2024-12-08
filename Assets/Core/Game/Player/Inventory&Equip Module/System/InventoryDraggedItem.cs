@@ -25,7 +25,7 @@ public class InventoryDraggedItem
             if (currentController != null)
             {
                 Item.Position = currentController.ScreenToGrid(value + offset + GetDraggedItemOffset(currentController.inventoryRenderer, Item));
-                var canAdd = currentController.inventory.CanAddAt(Item, Item.Position) || CanSwap();
+                var canAdd = currentController.Inventory.CanAddAt(Item, Item.Position) || CanSwap();
                 currentController.inventoryRenderer.SelectItem(Item, !canAdd, Color.white);
             }
 
@@ -59,22 +59,22 @@ public class InventoryDraggedItem
         {
             var grid = currentController.ScreenToGrid(pos + offset + GetDraggedItemOffset(currentController.inventoryRenderer, Item));
 
-            if (currentController.inventory.CanAddAt(Item, grid))
+            if (currentController.Inventory.CanAddAt(Item, grid))
             {
-                currentController.inventory.TryAddAt(Item, grid);
+                currentController.Inventory.TryAddAt(Item, grid);
                 mode = DropMode.Added;
             }
             else if (CanSwap())
             {
-                var otherItem = currentController.inventory.AllItems[0];
-                currentController.inventory.TryRemove(otherItem);
-                OriginalController.inventory.TryAdd(otherItem);
-                currentController.inventory.TryAdd(Item);
+                var otherItem = currentController.Inventory.AllItems[0];
+                currentController.Inventory.TryRemove(otherItem);
+                OriginalController.Inventory.TryAdd(otherItem);
+                currentController.Inventory.TryAdd(Item);
                 mode = DropMode.Swapped;
             }
             else
             {
-                OriginalController.inventory.TryAddAt(Item, OriginPoint);
+                OriginalController.Inventory.TryAddAt(Item, OriginPoint);
                 mode = DropMode.Returned;
 
             }
@@ -84,9 +84,9 @@ public class InventoryDraggedItem
         else
         {
             mode = DropMode.Dropped;
-            if (!OriginalController.inventory.TryForceDrop(Item))
+            if (!OriginalController.Inventory.TryForceDrop(Item))
             {
-                OriginalController.inventory.TryAddAt(Item, OriginPoint);
+                OriginalController.Inventory.TryAddAt(Item, OriginPoint);
             }
         }
 
@@ -106,8 +106,8 @@ public class InventoryDraggedItem
     }
     private bool CanSwap()
     {
-        if (!currentController.inventory.CanSwap(Item)) return false;
-        var otherItem = currentController.inventory.AllItems[0];
-        return OriginalController.inventory.CanAdd(otherItem) && currentController.inventory.CanRemove(otherItem);
+        if (!currentController.Inventory.CanSwap(Item)) return false;
+        var otherItem = currentController.Inventory.AllItems[0];
+        return OriginalController.Inventory.CanAdd(otherItem) && currentController.Inventory.CanRemove(otherItem);
     }
 }

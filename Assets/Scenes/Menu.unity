@@ -1866,6 +1866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 96179556}
+  inventoryController: {fileID: 1420558403}
+  canvas: {fileID: 1130426365}
 --- !u!1 &369504231
 GameObject:
   m_ObjectHideFlags: 0

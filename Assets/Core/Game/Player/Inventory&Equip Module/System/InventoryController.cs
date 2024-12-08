@@ -9,8 +9,8 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
     public InventoryRenderer inventoryRenderer;
 
     private Canvas canvas;
-    private IInventoryItem itemToDrag;
-    private PointerEventData currentEventData;
+    public IInventoryItem itemToDrag;
+    public PointerEventData currentEventData;
     private IInventoryItem lastHoveredItem;
     private static InventoryDraggedItem draggedItem;
 
@@ -20,7 +20,7 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
     public Action<IInventoryItem> OnItemSwapped { get; set; }
     public Action<IInventoryItem> OnItemReturned { get; set; }
     public Action<IInventoryItem> OnItemDropped { get; set; }
-    public InventoryManager inventory => (InventoryManager)inventoryRenderer.inventory;
+    public InventoryManager Inventory => (InventoryManager)inventoryRenderer.inventory;
     private void Awake()
     {
         inventoryRenderer = GetComponent<InventoryRenderer>();
@@ -34,14 +34,13 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
     {
         if (draggedItem != null) return;
         var grid = ScreenToGrid(eventData.position);
-        itemToDrag = inventory.GetAtPoint(grid);
+        itemToDrag = Inventory.GetAtPoint(grid);
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
         inventoryRenderer.ClearSelection();
 
         if (itemToDrag == null || draggedItem != null) return;
-
         var localPosition = ScreenToLocalPositionInRenderer(eventData.position);
         var itemOffest = inventoryRenderer.GetItemOffset(itemToDrag);
         var offset = itemOffest - localPosition;
@@ -54,7 +53,7 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
             canvas
         );
 
-        inventory.TryRemove(itemToDrag);
+        Inventory.TryRemove(itemToDrag);
 
         OnItemPickedUp?.Invoke(itemToDrag);
     }
@@ -63,8 +62,7 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
         currentEventData = eventData;
         if (draggedItem != null)
         {
-            // Update the items position
-            //_draggedItem.Position = eventData.position;
+            //draggedItem.Position = eventData.position;
         }
     }
     public void OnEndDrag(PointerEventData eventData)
@@ -118,7 +116,7 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
         if (draggedItem == null)
         {
             var grid = ScreenToGrid(currentEventData.position);
-            var item = inventory.GetAtPoint(grid);
+            var item = Inventory.GetAtPoint(grid);
             if (item == lastHoveredItem) return;
             OnItemHovered?.Invoke(item);
             lastHoveredItem = item;

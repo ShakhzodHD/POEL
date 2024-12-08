@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
         {
             bool isActive = mainInventoryPanel.gameObject.activeSelf;
             mainInventoryPanel.gameObject.SetActive(!isActive);
-
+            Boostrap.Instance.CentralizedClickHandler.IsOpenInvenotry = !isActive;
             //Cursor.lockState = isActive ? CursorLockMode.Locked : CursorLockMode.None;
             //Cursor.visible = !isActive;
         }
