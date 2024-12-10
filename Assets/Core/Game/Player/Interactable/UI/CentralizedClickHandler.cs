@@ -9,7 +9,6 @@ public class CentralizedClickHandler : MonoBehaviour
     [SerializeField] private InventoryController inventoryController;
 
     private ItemData currentItemData;
-    private PointerEventData inventoryEventData;
     private PointerEventData currentEventData;
 
     public bool IsOpenInvenotry
@@ -84,18 +83,16 @@ public class CentralizedClickHandler : MonoBehaviour
             {
                 inventoryController.OnPointerExit(currentEventData);
                 inventoryController.OnEndDrag(currentEventData);
-                IsDropItem = false;
+                IsDropItem = false; 
             }
-            currentItemData = null;
+            ClearItemObject();
         }
 
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            TextMeshPro textMeshPro = hit.collider.GetComponent<TextMeshPro>();
-            if (textMeshPro != null)
+            if (hit.collider.TryGetComponent<TextMeshPro>(out var textMeshPro))
             {
                 currentItemData = hit.collider.GetComponentInParent<ItemData>();
                 if (currentItemData != null && currentItemData.ItemDefinition != null)
@@ -103,8 +100,17 @@ public class CentralizedClickHandler : MonoBehaviour
                     IInventoryItem item = currentItemData.ItemDefinition.CreateInstance();
                     currentItemData.gameObject.SetActive(false);
 
-                    inventoryController.Inventory.TryAdd(item);
-                    inventoryController.OnItemPickedUp?.Invoke(item);
+                    if (inventoryController.Inventory.TryAdd(item))
+                    {
+                        inventoryController.OnItemPickedUp?.Invoke(item);
+                    }
+                    else
+                    {
+                        Debug.Log("No space in inventory");
+                        HandleItemDropped(item);
+                        return;
+                    }
+
                 }
             }
         }
@@ -124,14 +130,15 @@ public class CentralizedClickHandler : MonoBehaviour
         {
             inventoryController.OnPointerDown(currentEventData);
             inventoryController.itemToDrag = addedItem;
-            inventoryController.OnBeginDrag(currentEventData);
-        }
 
-        //if (currentItemData != null)
-        //{
-        //    Destroy(currentItemData.gameObject);
-        //    currentItemData = null;
-        //}
+            Vector2 mousePosition = currentEventData.position;
+            Vector2Int mousePositionInt = new(
+                Mathf.RoundToInt(mousePosition.x),
+                Mathf.RoundToInt(mousePosition.y)
+            );
+
+            inventoryController.BeginDragManually(addedItem, mousePositionInt, Vector3.zero);
+        }
     }
 
     private void HandleItemDropped(IInventoryItem droppedItem)
@@ -139,6 +146,14 @@ public class CentralizedClickHandler : MonoBehaviour
         if (currentItemData != null)
         {
             currentItemData.gameObject.SetActive(true);
+            currentItemData = null;
+        }
+    }
+    private void ClearItemObject()
+    {
+        if (currentItemData != null)
+        {
+            Destroy(currentItemData.gameObject);
             currentItemData = null;
         }
     }

@@ -19,6 +19,6 @@ MonoBehaviour:
     width: 2
     height: 2
     shape: 01010101
-  type: 2
+  type: 3
   canDrop: 1
   position: {x: 0, y: 0}

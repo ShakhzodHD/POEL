@@ -36,6 +36,20 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
         var grid = ScreenToGrid(eventData.position);
         itemToDrag = Inventory.GetAtPoint(grid);
     }
+    private void StartDragging(IInventoryItem item, Vector2 offset, Vector2Int position)
+    {
+        draggedItem = new InventoryDraggedItem(
+            this,
+            position,
+            item,
+            offset,
+            canvas
+        );
+
+        Inventory.TryRemove(item);
+
+        OnItemPickedUp?.Invoke(item);
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         inventoryRenderer.ClearSelection();
@@ -45,18 +59,17 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
         var itemOffest = inventoryRenderer.GetItemOffset(itemToDrag);
         var offset = itemOffest - localPosition;
 
-        draggedItem = new InventoryDraggedItem(
-            this,
-            itemToDrag.Position,
-            itemToDrag,
-            offset,
-            canvas
-        );
-
-        Inventory.TryRemove(itemToDrag);
-
-        OnItemPickedUp?.Invoke(itemToDrag);
+        StartDragging(itemToDrag, offset, itemToDrag.Position);
     }
+    public void BeginDragManually(IInventoryItem item, Vector2Int position, Vector2 customOffset)
+    {
+        inventoryRenderer.ClearSelection();
+
+        if (item == null || draggedItem != null) return;
+
+        StartDragging(item, customOffset, position);
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         currentEventData = eventData;
@@ -70,7 +83,6 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
         if (draggedItem == null) return;
 
         var mode = draggedItem.Drop(eventData.position);
-
         switch (mode)
         {
             case DropMode.Added:

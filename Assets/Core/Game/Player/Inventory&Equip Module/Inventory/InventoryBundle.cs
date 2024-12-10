@@ -106,16 +106,17 @@ public class InventoryBundle : MonoBehaviour
 
     private void OnItemAddedFailed(object item)
     {
+        Boostrap.Instance.InteractionManager.DropItem(item as ItemDefinition);
         Debug.Log($"You can't put {(item as ItemDefinition).Name} there!");
     }
 
     private void OnItemAdded(object item)
     {
-        //Debug.Log($"Item Added {(item as ItemDefinition).Name}");
+        Debug.Log($"Item Added {(item as ItemDefinition).Name}");
     }
 
     private void OnItemRemoved(object item)
     {
-        //Debug.Log($"Item removed {(item as ItemDefinition).Name}");
+        Debug.Log($"Item removed {(item as ItemDefinition).Name}");
     }
 }
