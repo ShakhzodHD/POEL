@@ -56,6 +56,7 @@ public class HeroPickPanel : MonoBehaviour
         Boostrap.Instance.ScenesService.LoadLevel(Constants.HIDEOUT_SCENE_NAME);
         Boostrap.Instance.GameEvents.OnEnterHideout?.Invoke();
         Boostrap.Instance.PlayerData.selectedCharacter = character;
+        Boostrap.Instance.CentralizedClickHandler.SubscribeEvents();
     }
     private void OnButtonCreateHeroClick()
     {

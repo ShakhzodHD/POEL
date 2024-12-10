@@ -76,7 +76,6 @@ public class InventoryDraggedItem
             {
                 OriginalController.Inventory.TryAddAt(Item, OriginPoint);
                 mode = DropMode.Returned;
-
             }
 
             currentController.inventoryRenderer.ClearSelection();

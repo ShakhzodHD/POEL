@@ -97,6 +97,7 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
         {
             draggedItem.currentController = null;
             inventoryRenderer.ClearSelection();
+            Boostrap.Instance.CentralizedClickHandler.IsDropItem = false;
         }
         else { ClearHoveredItem(); }
         currentEventData = null;
@@ -106,6 +107,7 @@ public class InventoryController : MonoBehaviour, IInventoryController, IPointer
         if (draggedItem != null)
         {
             draggedItem.currentController = this;
+            Boostrap.Instance.CentralizedClickHandler.IsDropItem = true;
         }
         currentEventData = eventData;
     }

@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 public class CentralizedClickHandler : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private InventoryController inventoryController;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private InventoryController inventoryController;
 
     private ItemData currentItemData;
+    private PointerEventData inventoryEventData;
     private PointerEventData currentEventData;
 
     public bool IsOpenInvenotry
@@ -22,19 +23,32 @@ public class CentralizedClickHandler : MonoBehaviour
         }
     }
     private bool isOpenInventory;
+    public bool IsDropItem
+    {
+        set
+        {
+            if (isDropItem != value)
+            {
+                isDropItem = value;
+            }
+        }
+    }
+    private bool isDropItem;
 
     private void Start()
     {
         if (playerCamera == null) playerCamera = Boostrap.Instance.Camera;
 
         currentEventData = new PointerEventData(EventSystem.current);
-
-        SubscribeToInventoryEvents(true);
     }
 
-    private void OnDestroy()
+    public void UnsubscribeEvents()
     {
         SubscribeToInventoryEvents(false);
+    }
+    public void SubscribeEvents()
+    {
+        SubscribeToInventoryEvents(true);
     }
     private void SubscribeToInventoryEvents(bool subscribe)
     {
@@ -42,27 +56,39 @@ public class CentralizedClickHandler : MonoBehaviour
 
         if (subscribe)
         {
-            inventoryController.OnItemAdded += HandleItemAdded;
+            inventoryController.OnItemPickedUp += HandleItemAdded;
             inventoryController.OnItemDropped += HandleItemDropped;
         }
         else
         {
-            inventoryController.OnItemAdded -= HandleItemAdded;
+            inventoryController.OnItemPickedUp -= HandleItemAdded;
             inventoryController.OnItemDropped -= HandleItemDropped;
         }
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            HandleClick();
-        }
+        if (!isOpenInventory) return;
         UpdateGlobalEvenData();
     }
 
-    private void HandleClick()
+    public void HandleClick()
     {
+        if (currentItemData != null)
+        {
+            if (isDropItem)
+            {
+                inventoryController.OnEndDrag(currentEventData);
+            }
+            else
+            {
+                inventoryController.OnPointerExit(currentEventData);
+                inventoryController.OnEndDrag(currentEventData);
+                IsDropItem = false;
+            }
+            currentItemData = null;
+        }
+
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -75,11 +101,10 @@ public class CentralizedClickHandler : MonoBehaviour
                 if (currentItemData != null && currentItemData.ItemDefinition != null)
                 {
                     IInventoryItem item = currentItemData.ItemDefinition.CreateInstance();
-
                     currentItemData.gameObject.SetActive(false);
 
                     inventoryController.Inventory.TryAdd(item);
-                    inventoryController.OnItemAdded?.Invoke(item);
+                    inventoryController.OnItemPickedUp?.Invoke(item);
                 }
             }
         }
@@ -102,11 +127,11 @@ public class CentralizedClickHandler : MonoBehaviour
             inventoryController.OnBeginDrag(currentEventData);
         }
 
-        if (currentItemData != null)
-        {
-            Destroy(currentItemData.gameObject);
-            currentItemData = null;
-        }
+        //if (currentItemData != null)
+        //{
+        //    Destroy(currentItemData.gameObject);
+        //    currentItemData = null;
+        //}
     }
 
     private void HandleItemDropped(IInventoryItem droppedItem)

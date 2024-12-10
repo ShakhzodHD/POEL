@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
                 ChangeMenuState(MenuStates.StartMenu);
                 CloseInventory();
                 Boostrap.Instance.ScenesService.LoadMenu();
+                Boostrap.Instance.CentralizedClickHandler.UnsubscribeEvents();
                 break;
             case GameStates.InProgress:
                 ChangeMenuState(MenuStates.Gameplay);

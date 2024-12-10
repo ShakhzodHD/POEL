@@ -9,6 +9,12 @@ public class InventoryBundle : MonoBehaviour
 
     private readonly InventoryRenderMode equipRenderMode = InventoryRenderMode.Single;
     private int equipMaximumAlowedItemCount;
+
+    private InventoryManager currentInventory;
+    private InventoryProvider currentProvider;
+
+    private InventoryManager[] equipmentInventories;
+
     public void CreateEquipment(out InventoryProvider[] equipProviders, out InventoryManager[] equipInventoryes)
     {
         equipProviders = new InventoryProvider[equipmentItems.Length];
@@ -23,70 +29,93 @@ public class InventoryBundle : MonoBehaviour
             equipProviders[i] = new InventoryProvider(equipRenderMode, equipMaximumAlowedItemCount, allowedItem);
             equipInventoryes[i] = new InventoryManager(equipProviders[i], sizeSlotEquip.x, sizeSlotEquip.y);
         }
+
+        equipmentInventories = equipInventoryes;
     }
+
     public void CreateMainInventory(out InventoryProvider provider, out InventoryManager inventory)
     {
         provider = new InventoryProvider(mainInventory.renderMode, mainInventory.maximumAlowedItemCount, mainInventory.allowedItem);
         inventory = new InventoryManager(provider, mainInventory.width, mainInventory.height);
     }
+
     public void SetEquipment(Character character)
     {
-        for (int i = 0;i < equipmentItems.Length; i++)
+        if (equipmentInventories != null)
+        {
+            foreach (var inventory in equipmentInventories)
+            {
+                UnsubscribeFromInventoryEvents(inventory);
+            }
+        }
+
+        for (int i = 0; i < equipmentItems.Length; i++)
         {
             var inventory = character.Equipments.equipmentManages[i];
             var provider = character.Equipments.equipmentProviders[i];
 
             equipmentItems[i].gameObject.GetComponent<InventoryRenderer>().SetInventory(inventory, provider.InventoryRenderMode);
 
-            inventory.OnItemDropped += (item) =>
-            {
-                Debug.Log((item as ItemDefinition).Name + " was dropped on the ground");
-
-                Boostrap.Instance.InteractionManager.DropItem(item as ItemDefinition);
-            };
-
-            inventory.OnItemDroppedFailed += (item) =>
-            {
-                Debug.Log($"You're not allowed to drop {(item as ItemDefinition).Name} on the ground");
-            };
-
-            inventory.OnItemAddedFailed += (item) =>
-            {
-                Debug.Log($"You can't put {(item as ItemDefinition).Name} there!");
-            };
-
-            inventory.OnItemAdded += (item) =>
-            {
-                Debug.Log($"Item Added {(item as ItemDefinition).Name}");
-            };
-            inventory.OnItemRemoved += (item) =>
-            {
-                Debug.Log($"Item removed {(item as ItemDefinition).Name}");
-            };
+            SubscribeToInventoryEvents(inventory);
         }
     }
+
     public void SetMainInventory(Character character)
     {
-        var inventory = character.MainInventoryManager;
-        var provider = character.MainInventoryProvider;
-
-        mainInventory.gameObject.GetComponent<InventoryRenderer>().SetInventory(inventory, provider.InventoryRenderMode);
-
-        inventory.OnItemDropped += (item) =>
+        if (currentInventory != null)
         {
-            Debug.Log((item as ItemDefinition).Name + " was dropped on the ground");
+            UnsubscribeFromInventoryEvents(currentInventory);
+        }
 
-            Boostrap.Instance.InteractionManager.DropItem(item as ItemDefinition);
-        };
+        currentInventory = character.MainInventoryManager;
+        currentProvider = character.MainInventoryProvider;
 
-        inventory.OnItemDroppedFailed += (item) =>
-        {
-            Debug.Log($"You're not allowed to drop {(item as ItemDefinition).Name} on the ground");
-        };
+        mainInventory.gameObject.GetComponent<InventoryRenderer>().SetInventory(currentInventory, currentProvider.InventoryRenderMode);
 
-        inventory.OnItemAddedFailed += (item) =>
-        {
-            Debug.Log($"You can't put {(item as ItemDefinition).Name} there!");
-        };
+        SubscribeToInventoryEvents(currentInventory);
+    }
+
+    private void SubscribeToInventoryEvents(InventoryManager inventory)
+    {
+        inventory.OnItemDropped += OnItemDropped;
+        inventory.OnItemDroppedFailed += OnItemDroppedFailed;
+        inventory.OnItemAddedFailed += OnItemAddedFailed;
+        inventory.OnItemAdded += OnItemAdded;
+        inventory.OnItemRemoved += OnItemRemoved;
+    }
+
+    private void UnsubscribeFromInventoryEvents(InventoryManager inventory)
+    {
+        inventory.OnItemDropped -= OnItemDropped;
+        inventory.OnItemDroppedFailed -= OnItemDroppedFailed;
+        inventory.OnItemAddedFailed -= OnItemAddedFailed;
+        inventory.OnItemAdded -= OnItemAdded;
+        inventory.OnItemRemoved -= OnItemRemoved;
+    }
+
+    private void OnItemDropped(object item)
+    {
+        //Debug.Log((item as ItemDefinition).Name + " was dropped on the ground");
+        Boostrap.Instance.InteractionManager.DropItem(item as ItemDefinition);
+    }
+
+    private void OnItemDroppedFailed(object item)
+    {
+        Debug.Log($"You're not allowed to drop {(item as ItemDefinition).Name} on the ground");
+    }
+
+    private void OnItemAddedFailed(object item)
+    {
+        Debug.Log($"You can't put {(item as ItemDefinition).Name} there!");
+    }
+
+    private void OnItemAdded(object item)
+    {
+        //Debug.Log($"Item Added {(item as ItemDefinition).Name}");
+    }
+
+    private void OnItemRemoved(object item)
+    {
+        //Debug.Log($"Item removed {(item as ItemDefinition).Name}");
     }
 }

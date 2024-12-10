@@ -4,5 +4,6 @@ public enum InputActions
     UseMajorAbility,
     UseMinorAbility,
     UseEscapeAbility,
-    Inventory
+    Inventory,
+    LeftMouseClick
 }
