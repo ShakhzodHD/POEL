@@ -21,10 +21,11 @@ public class Character
     public InventoryManager MainInventoryManager { get; private set; }
     public InventoryProvider MainInventoryProvider { get; private set; }
     public Equipments Equipments { get; private set; }
+    public Stash Stash { get; private set; }
     public Character(int id, string name, 
         CharacterClass characterClass, ActiveAbility major, ActiveAbility minor, ActiveAbility escape, PassiveAbility passive,
         float maxHealth, float maxResource, float movementSpeed, Stats stats, 
-        InventoryManager mainInventory, InventoryProvider mainProvider, Equipments equipments)
+        InventoryManager mainInventory, InventoryProvider mainProvider, Equipments equipments, Stash stash)
     {
         Name = name;
         CharacterClass = characterClass;
@@ -45,6 +46,7 @@ public class Character
         MainInventoryManager = mainInventory;
         MainInventoryProvider = mainProvider;
         Equipments = equipments;
+        Stash = stash;
     }
     public void AddSkillPoints(int points)
     {

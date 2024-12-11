@@ -87,6 +87,7 @@ public class Player : MonoBehaviour
 
         Boostrap.Instance.InventoryBundle.SetMainInventory(currentCharacter);
         Boostrap.Instance.InventoryBundle.SetEquipment(currentCharacter);
+        Boostrap.Instance.InventoryBundle.SetStash(currentCharacter);
     }
     public void ApplySkillEffects(Skill skill)
     {

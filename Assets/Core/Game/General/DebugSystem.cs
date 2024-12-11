@@ -6,6 +6,8 @@ public class DebugSystem : MonoBehaviour
     [SerializeField] private ItemDefinition weapon;
     [SerializeField] private ItemDefinition helmert;
 
+    public GameObject temp;
+
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.X))
@@ -19,6 +21,11 @@ public class DebugSystem : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.B))
         {
             Boostrap.Instance.PlayerData.selectedCharacter.MainInventoryManager.TryAdd(helmert.CreateInstance());
+        }
+        if (Input.GetKeyUp(KeyCode.H))
+        {
+            bool isActive = temp.gameObject.activeSelf;
+            temp.gameObject.SetActive(!isActive);
         }
     }
 }

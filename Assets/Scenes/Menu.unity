@@ -1821,6 +1821,7 @@ MonoBehaviour:
   debugPanel: {fileID: 1938219481}
   weapon: {fileID: 11400000, guid: 4f1f594453c99794da4ef79077e209c4, type: 2}
   helmert: {fileID: 11400000, guid: f277cb4e6cba6e94687b8deeffd0cbae, type: 2}
+  temp: {fileID: 2124470524}
 --- !u!114 &353980121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1842,6 +1843,7 @@ MonoBehaviour:
   - {fileID: 312066729}
   - {fileID: 567578135}
   - {fileID: 1658111260}
+  stash: {fileID: 1838849164}
   sizeSlotEquip: {x: 1, y: 1}
 --- !u!114 &353980122
 MonoBehaviour:
@@ -4704,6 +4706,7 @@ RectTransform:
   - {fileID: 8013041}
   - {fileID: 580783657}
   - {fileID: 182484092}
+  - {fileID: 2124470525}
   - {fileID: 1938219482}
   - {fileID: 1194911763}
   m_Father: {fileID: 1570382895}
@@ -6472,7 +6475,9 @@ MonoBehaviour:
 
     NUMBER 1 - Add EXP
 
-'
+
+    H
+    - Stash'
 --- !u!222 &1633554471
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7384,6 +7389,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837692478}
   m_CullTransparentMesh: 1
+--- !u!1 &1838849161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1838849162}
+  - component: {fileID: 1838849164}
+  - component: {fileID: 1838849163}
+  - component: {fileID: 1838849165}
+  m_Layer: 0
+  m_Name: StashGrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1838849162
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838849161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2124470525}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1838849163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838849161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9ed4fa8d2b821428d88e54f55ef65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSize: {x: 70, y: 70}
+  cellSpriteEmpty: {fileID: 21300000, guid: 980796b063d169b4b9ee9fae7b12b8f4, type: 3}
+  cellSpriteSelected: {fileID: 21300000, guid: 70d47622694d28e4581574239ff70161, type: 3}
+  cellSpriteBlocked: {fileID: 21300000, guid: fd105c9cb77d6b94090447c64a7ad3f3, type: 3}
+--- !u!114 &1838849164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838849161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343dba1176dc4c940a24b441120dce80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  maximumAlowedItemCount: -1
+  allowedItem: 0
+  width: 8
+  height: 8
+--- !u!114 &1838849165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838849161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007d46fa0d2a9c3408ad16cd30d02841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryRenderer: {fileID: 1838849163}
 --- !u!1 &1856700897
 GameObject:
   m_ObjectHideFlags: 0
@@ -8969,6 +9058,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115217543}
   m_CullTransparentMesh: 1
+--- !u!1 &2124470524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124470525}
+  m_Layer: 0
+  m_Name: StashPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2124470525
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124470524}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1838849162}
+  m_Father: {fileID: 1130426362}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: -0, y: 0.3}
+  m_AnchorMax: {x: 0.3, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2127880338
 GameObject:
   m_ObjectHideFlags: 0

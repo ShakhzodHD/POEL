@@ -4,6 +4,7 @@ public class InventoryBundle : MonoBehaviour
 {
     public SizeInventory mainInventory;
     public SizeInventory[] equipmentItems;
+    public SizeInventory stash;
 
     [SerializeField] private Vector2Int sizeSlotEquip = new(1, 1);
 
@@ -14,6 +15,8 @@ public class InventoryBundle : MonoBehaviour
     private InventoryProvider currentProvider;
 
     private InventoryManager[] equipmentInventories;
+
+    private Stash currentStash;
 
     public void CreateEquipment(out InventoryProvider[] equipProviders, out InventoryManager[] equipInventoryes)
     {
@@ -37,6 +40,12 @@ public class InventoryBundle : MonoBehaviour
     {
         provider = new InventoryProvider(mainInventory.renderMode, mainInventory.maximumAlowedItemCount, mainInventory.allowedItem);
         inventory = new InventoryManager(provider, mainInventory.width, mainInventory.height);
+    }
+
+    public void CreateStash(out InventoryProvider provider, out InventoryManager inventory)
+    {
+        provider = new InventoryProvider(stash.renderMode);
+        inventory = new InventoryManager(provider, stash.width, stash.height);
     }
 
     public void SetEquipment(Character character)
@@ -73,6 +82,14 @@ public class InventoryBundle : MonoBehaviour
         mainInventory.gameObject.GetComponent<InventoryRenderer>().SetInventory(currentInventory, currentProvider.InventoryRenderMode);
 
         SubscribeToInventoryEvents(currentInventory);
+    }
+
+    public void SetStash(Character character)
+    {
+        var stashManager = character.Stash.stashManager;
+        var stashProvider = character.Stash.stashProvider;
+
+        stash.gameObject.GetComponent<InventoryRenderer>().SetInventory(stashManager,stashProvider.InventoryRenderMode);
     }
 
     private void SubscribeToInventoryEvents(InventoryManager inventory)
