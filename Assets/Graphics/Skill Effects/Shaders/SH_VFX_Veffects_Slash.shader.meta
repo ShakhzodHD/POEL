@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: bada6ceb08fe07e419493f5ffd20b888
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Slash_Texture: {fileID: 2800000, guid: 0ff8e5dfd92c3a84499fb0aec5d3431a, type: 3}
+  - _Slash_Noise_Texture: {fileID: 2800000, guid: bf39d4b56a4bab74aa1cf8eb2ec57428,
+      type: 3}
+  - _Emissive_Slash_Texture: {fileID: 2800000, guid: 0ff8e5dfd92c3a84499fb0aec5d3431a,
+      type: 3}
+  - _Emissive_Dissolve_Texture: {fileID: 2800000, guid: bf39d4b56a4bab74aa1cf8eb2ec57428,
+      type: 3}
+  - _Distortion_Noise_Texture: {fileID: 2800000, guid: bf39d4b56a4bab74aa1cf8eb2ec57428,
+      type: 3}
+  - _Color_Noise_Texture: {fileID: 2800000, guid: bf39d4b56a4bab74aa1cf8eb2ec57428,
+      type: 3}
+  - _Mask: {fileID: 2800000, guid: 842e72a1a4a7fa242a4990a4c09d61bb, type: 3}
+  - _texcoord: {instanceID: 0}
+  - _texcoord2: {instanceID: 0}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
