@@ -110,6 +110,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6d5ccbc0-0144-4854-a10b-0e4a26fcdf16
     m_ActionName: Player/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 40e9e322-2633-4010-811e-fbae43cb4982
+    m_ActionName: Player/LeftMouseClick[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
