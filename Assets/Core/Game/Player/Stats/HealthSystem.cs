@@ -9,7 +9,15 @@ public class HealthSystem
         get => currentHealth;
         set
         {
+            float oldHealth = currentHealth;
+
             currentHealth = Math.Clamp(value, 0, MaxHealth);
+
+            if (oldHealth != currentHealth)
+            {
+                OnHealthChanged?.Invoke(currentHealth / MaxHealth);
+            }
+
             if (currentHealth <= 0 && !isDead)
             {
                 Die();
@@ -20,12 +28,13 @@ public class HealthSystem
     private float currentHealth;
     private bool isDead;
 
+    public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
     public HealthSystem(float maxHealth)
     {
         MaxHealth = maxHealth;
-        CurrentHealth = maxHealth;
+        currentHealth = maxHealth;
         isDead = false;
     }
 

@@ -27,5 +27,9 @@ public class DebugSystem : MonoBehaviour
             bool isActive = temp.gameObject.activeSelf;
             temp.gameObject.SetActive(!isActive);
         }
+        if (Input.GetKeyUp(KeyCode.J))
+        {
+            Boostrap.Instance.PlayerData.selectedCharacter.Health.TakeDamage(5);
+        }
     }
 }

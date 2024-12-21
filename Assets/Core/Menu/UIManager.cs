@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private RectTransform mainInventoryPanel;
 
+    public HealthBarUI healthBarUI;
+    public ResourceBarUI resourceBarUI;
+
     private MenuStates _menuStates = MenuStates.StartMenu;
 
     public void Init()

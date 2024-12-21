@@ -15,4 +15,4 @@ MonoBehaviour:
   abilityName: Cyclone 1
   description: 
   resourceType: 1
-  resourceCost: 200
+  resourceCost: 5

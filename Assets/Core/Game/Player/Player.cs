@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     private PlayerInput input;
     private PlayerMovement playerMovement;
 
-    private HealthSystem healthSystem;
     private ResourceSystem resourceSystem;
     private void Start()
     {
@@ -65,8 +64,7 @@ public class Player : MonoBehaviour
         currentCharacter = Boostrap.Instance.PlayerData.selectedCharacter; ;
         characterClass = currentCharacter.CharacterClass;
 
-        healthSystem = new HealthSystem(characterClass.baseHealth);
-        resourceSystem = new ResourceSystem(characterClass.baseResource);
+        resourceSystem = currentCharacter.Resource;
 
         playerMovement.MovementSpeed = currentCharacter.Speed;
 
@@ -88,6 +86,9 @@ public class Player : MonoBehaviour
         Boostrap.Instance.InventoryBundle.SetMainInventory(currentCharacter);
         Boostrap.Instance.InventoryBundle.SetEquipment(currentCharacter);
         Boostrap.Instance.InventoryBundle.SetStash(currentCharacter);
+
+        Boostrap.Instance.UIManager.healthBarUI.Initialize(currentCharacter.Health);
+        Boostrap.Instance.UIManager.resourceBarUI.Initialize(resourceSystem);
     }
     public void ApplySkillEffects(Skill skill)
     {
